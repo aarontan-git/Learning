@@ -1,4 +1,3 @@
-
 import argparse
 import gym
 import numpy as np
@@ -29,7 +28,8 @@ env = gym.make('CartPole-v0')
 env.seed(args.seed)
 torch.manual_seed(args.seed)
 
-
+# define a policy as a neural network with 4 input (4 states for a cartpole) and 2 output (2 available action)
+# the policy maps states to probabilities of actions (softmax)
 class Policy(nn.Module):
     def __init__(self):
         super(Policy, self).__init__()
