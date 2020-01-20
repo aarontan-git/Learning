@@ -10,7 +10,7 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 from torch.distributions import Categorical
 
-
+import time
 
 parser = argparse.ArgumentParser(description='PyTorch REINFORCE example')
 parser.add_argument('--gamma', type=float, default=0.99, metavar='G',
@@ -46,16 +46,17 @@ class Policy(nn.Module):
 
 
 policy = Policy()
+# optimizer updates the weights of the NN
 optimizer = optim.Adam(policy.parameters(), lr=1e-2)
 eps = np.finfo(np.float32).eps.item()
 
 
-def select_action(state):
-    state = torch.from_numpy(state).float().unsqueeze(0)
-    probs = policy(state)
-    m = Categorical(probs)
-    action = m.sample()
-    policy.saved_log_probs.append(m.log_prob(action))
+def select_action(state): # state = numpy array, state = array([ 0.03184929,  0.00238684, -0.02272496,  0.02353324])
+    state = torch.from_numpy(state).float().unsqueeze(0) # converts the numpy array into a tensor
+    probs = policy(state) # returns the probability of an action with the given state (eg. output of the NN) = tensor of 1x2
+    m = Categorical(probs) # turn the probability of action (categorical = left or right) in to a distribution
+    action = m.sample() # sample the action from the distribution computed previously
+    policy.saved_log_probs.append(m.log_prob(action)) # log_prob returns the log of the probability density/mass function evaluated at the given sample value
     return action.item()
 
 
@@ -63,33 +64,38 @@ def finish_episode():
     R = 0
     policy_loss = []
     rewards = []
-    for r in policy.rewards[::-1]:
+    for r in policy.rewards[::-1]: # r is the immediate reward based on every action in the episode
         R = r + args.gamma * R
-        rewards.insert(0, R)
-    rewards = torch.tensor(rewards)
+        rewards.insert(0, R) # create a list of rewards
+    rewards = torch.tensor(rewards) # turn the list of rewards in to a tensor
     rewards = (rewards - rewards.mean()) / (rewards.std() + eps)
     for log_prob, reward in zip(policy.saved_log_probs, rewards):
-        policy_loss.append(-log_prob * reward)
+        policy_loss.append(-log_prob * reward) # probability of the action that was taken and the reward it received
+        # loss is negative to do "gradient ascent"
     optimizer.zero_grad()
-    policy_loss = torch.cat(policy_loss).sum()
-    policy_loss.backward()
+    policy_loss = torch.cat(policy_loss).sum() # adds together all the rewards from the episode
+    policy_loss.backward() # update the NN based on the rewards (-loss)
     optimizer.step()
     del policy.rewards[:]
     del policy.saved_log_probs[:]
 
 
 def main():
-    running_reward = 10
+    running_reward = 10 # what is the running reward?
     for i_episode in count(1):
         state = env.reset()
-        for t in range(10000):  # Don't infinite loop while learning
-            action = select_action(state)
-            state, reward, done, _ = env.step(action)
+        for t in range(200):  # 10000 steps per episode, when the episode is done, done = True
+            # env.render()
+            action = select_action(state) # select action
+            state, reward, done, _ = env.step(action) #obtain new state (numpy array), reward, done (bool)
             if args.render:
                 env.render()
+                time.sleep(0.05)
             policy.rewards.append(reward)
-            if done:
-                break
+            # if done:
+            #     # env.reset()
+            #     break
+        env.close()
 
         running_reward = running_reward * 0.99 + t * 0.01
         finish_episode()

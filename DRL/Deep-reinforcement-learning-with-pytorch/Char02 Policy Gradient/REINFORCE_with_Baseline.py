@@ -110,6 +110,8 @@ def loop_episode():
 
         G = Gt[i]
         V = s_value_func(state_sequence[i])
+
+        # delta is your advantage function here
         delta = G - V
 
         # update value network
