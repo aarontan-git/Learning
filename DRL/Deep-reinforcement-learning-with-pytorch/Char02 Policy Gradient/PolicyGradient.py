@@ -56,7 +56,7 @@ def select_action(state): # state = numpy array, state = array([ 0.03184929,  0.
     probs = policy(state) # returns the probability of an action with the given state (eg. output of the NN) = tensor of 1x2
     m = Categorical(probs) # turn the probability of action (categorical = left or right) in to a distribution
     action = m.sample() # sample the action from the distribution computed previously
-    policy.saved_log_probs.append(m.log_prob(action)) # log_prob returns the log of the probability density/mass function evaluated at the given sample value
+    policy.saved_log_probs.append(m.log_prob(action)) # log_prob returns the probability of having taken the action
     return action.item()
 
 
@@ -72,6 +72,7 @@ def finish_episode():
     for log_prob, reward in zip(policy.saved_log_probs, rewards):
         policy_loss.append(-log_prob * reward) # probability of the action that was taken and the reward it received
         # loss is negative to do "gradient ascent"
+        # "log_prob * reward" is the policy gradient equation in notes
     optimizer.zero_grad()
     policy_loss = torch.cat(policy_loss).sum() # adds together all the rewards from the episode
     policy_loss.backward() # update the NN based on the rewards (-loss)
@@ -85,7 +86,6 @@ def main():
     for i_episode in count(1):
         state = env.reset()
         for t in range(200):  # 10000 steps per episode, when the episode is done, done = True
-            # env.render()
             action = select_action(state) # select action
             state, reward, done, _ = env.step(action) #obtain new state (numpy array), reward, done (bool)
             if args.render:

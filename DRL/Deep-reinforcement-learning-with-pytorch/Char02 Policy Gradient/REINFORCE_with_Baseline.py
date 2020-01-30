@@ -1,6 +1,3 @@
-
-
-
 import torch.nn as nn
 import torch.nn.functional as F
 import gym
@@ -19,14 +16,12 @@ render = False
 #                     help='render the environment')
 #args = parser.parse_args()
 
-#神经网络的输出： Net1输入state，输出action_prob; Net2 输入state,输出各个action_reward
 class Policy(nn.Module):
     def __init__(self,n_states, n_hidden, n_output):
         super(Policy, self).__init__()
         self.linear1 = nn.Linear(n_states, n_hidden)
         self.linear2 = nn.Linear(n_hidden, n_output)
 
- #这是policy的参数
         self.reward = []
         self.log_act_probs = []
         self.Gt = []
@@ -38,28 +33,24 @@ class Policy(nn.Module):
     def forward(self, x):
         x = F.relu(self.linear1(x))
         output = F.softmax(self.linear2(x), dim= 1)
-        # self.act_probs.append(action_probs)
         return output
 
 
 
 env = gym.make('CartPole-v0')
-# writer = SummaryWriter('./yingyingying')
-# state = env.reset()
 n_states = env.observation_space.shape[0]
 n_actions = env.action_space.n
 
-policy = Policy(n_states, 128, n_actions)
-s_value_func = Policy(n_states, 128, 1)
+# define 2 networks, one for policy and one for value function, V(s)
+policy = Policy(n_states, 128, n_actions) # input = states, output = possible actions (move left, move right)
+s_value_func = Policy(n_states, 128, 1) # input = each state has 4 inputs (cart and pendulum position/velocity), value of state
 
 
-alpha_theta = 1e-3
+alpha_theta = 1e-3 # learning rate
 optimizer_theta = optim.Adam(policy.parameters(), lr=alpha_theta)
 # alpha_w = 1e-3  #初始化
 # optimizer_w = optim.Adam(policy.parameters(), lr=alpha_w)
 gamma = 0.99
-
-
 
 seed = 1
 env.seed(seed)
@@ -67,7 +58,6 @@ torch.manual_seed(seed)
 live_time = []
 
 def loop_episode():
-
     state = env.reset()
     if render: env.render()
     policy_loss = []
@@ -75,18 +65,18 @@ def loop_episode():
     state_sequence = []
     log_act_prob = []
     for t in range(1000):
-        state = torch.from_numpy(state).unsqueeze(0).float()  # 在第0维增加一个维度，将数据组织成[N , .....] 形式
+        state = torch.from_numpy(state).unsqueeze(0).float()  # turn state in to a tensor
         state_sequence.append(deepcopy(state))
-        action_probs = policy(state)
-        m = Categorical(action_probs)
-        action = m.sample()
-        m_log_prob = m.log_prob(action)
-        log_act_prob.append(m_log_prob)
+        action_probs = policy(state) # get an action distribution
+        m = Categorical(action_probs) 
+        action = m.sample() # sample from action distribution
+        m_log_prob = m.log_prob(action) # log prob of the action
+        log_act_prob.append(m_log_prob) # add log prob of the action to a list
         # policy.log_act_probs.append(m_log_prob)
         action = action.item()
-        next_state, re, done, _ = env.step(action)
+        next_state, re, done, _ = env.step(action) # enact the action chosen (Take a step in the environment)
         if render: env.render()
-        policy.reward.append(re)
+        policy.reward.append(re) # add the reward 
         if done:
             live_time.append(t)
             break
@@ -95,7 +85,7 @@ def loop_episode():
     R = 0
     Gt = []
 
-    # get Gt value
+    # get Gt value: long term reward (all immediate rewards in an episode)
     for r in policy.reward[::-1]:
         R = r + gamma * R
         Gt.insert(0, R)
@@ -104,19 +94,18 @@ def loop_episode():
 
 
     # update step by step
-    for i in range(len(Gt)):
+    for i in range(len(Gt)): # iterate over each episode
 
-
-
+        # in one episode, G is the total reward obtained from that episode, and V is the state value ( I assume of the first state where that episode began?)
         G = Gt[i]
         V = s_value_func(state_sequence[i])
 
-        # delta is your advantage function here
+        # delta is your advantage function here - aaron: not sure if this is considered as an advantage function since it is technically G - V instead of Q - V
         delta = G - V
 
         # update value network
+        # the value network is updated based on the advantage function
         alpha_w = 1e-3  # 初始化
-
         optimizer_w = optim.Adam(policy.parameters(), lr=alpha_w)
         optimizer_w.zero_grad()
         policy_loss_w =-delta
@@ -125,6 +114,7 @@ def loop_episode():
         optimizer_w.step()
 
         # update policy network
+        # the policy network is updated based on the log_prob and advantage function
         optimizer_theta.zero_grad()
         policy_loss_theta = - log_act_prob[i] * delta
         policy_loss_theta.backward(retain_graph = True)
@@ -147,9 +137,6 @@ def plot(live_time):
 
 if __name__ == '__main__':
 
-    #生成若干episode
-    # graph_data = torch.autograd.Variable(torch.ones(1,4))
-    # writer.add_graph(policy, (graph_data, ))
     for i_episode in range(1000):
         loop_episode()
         plot(live_time)

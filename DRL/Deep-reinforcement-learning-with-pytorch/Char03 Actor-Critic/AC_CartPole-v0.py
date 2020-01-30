@@ -29,9 +29,11 @@ render = False
 eps = np.finfo(np.float32).eps.item()
 SavedAction = namedtuple('SavedAction', ['log_prob', 'value'])
 
+# In A2C, there is only one network but with 2 types of outputs (state value and probability of action)
 class Policy(nn.Module):
     def __init__(self):
         super(Policy, self).__init__()
+        # the network's architecture is input->32->action space, and input->32->state_value, whree the input layer and hidden layer (32) are shared 
         self.fc1 = nn.Linear(state_space, 32)
 
         self.action_head = nn.Linear(32, action_space)
@@ -43,9 +45,10 @@ class Policy(nn.Module):
 
     def forward(self, x):
         x = F.relu(self.fc1(x))
+        # can go forward through the action_score or state_value part of the same network
         action_score = self.action_head(x)
         state_value = self.value_head(x)
-
+        # return two types of output, the softmax for action and the state_value
         return F.softmax(action_score, dim=-1), state_value
 
 model = Policy()
@@ -92,11 +95,11 @@ def finish_episode():
 
     for (log_prob , value), r in zip(save_actions, rewards):
         reward = r - value.item()
-        policy_loss.append(-log_prob * reward)
-        value_loss.append(F.smooth_l1_loss(value, torch.tensor([r])))
+        policy_loss.append(-log_prob * reward) # same loss function as REINFORCE for the policy part of the network
+        value_loss.append(F.smooth_l1_loss(value, torch.tensor([r]))) # state value is compared with reward to calculate loss of the value network
 
     optimizer.zero_grad()
-    loss = torch.stack(policy_loss).sum() + torch.stack(value_loss).sum()
+    loss = torch.stack(policy_loss).sum() + torch.stack(value_loss).sum() #combines the policy loss and value loss to update the single network
     loss.backward()
     optimizer.step()
 
