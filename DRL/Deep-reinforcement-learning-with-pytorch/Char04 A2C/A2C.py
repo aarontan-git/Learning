@@ -37,13 +37,13 @@ class ActorCritic(nn.Module):
     def __init__(self, num_inputs, num_outputs, hidden_size, std=0.0):
         super(ActorCritic, self).__init__()
         
-        self.critic = nn.Sequential(
+        self.critic = nn.Sequential( # network that outputs value
             nn.Linear(num_inputs, hidden_size),
             nn.ReLU(),
             nn.Linear(hidden_size, 1)
         )
         
-        self.actor = nn.Sequential(
+        self.actor = nn.Sequential( # network that outputs prob of action
             nn.Linear(num_inputs, hidden_size),
             nn.ReLU(),
             nn.Linear(hidden_size, num_outputs),
@@ -72,7 +72,7 @@ def test_env(vis=False):
     return total_reward
 
 
-def compute_returns(next_value, rewards, masks, gamma=0.99):
+def compute_returns(next_value, rewards, masks, gamma=0.99): # calculates Q
     R = next_value
     returns = []
     for step in reversed(range(len(rewards))):
@@ -115,18 +115,18 @@ while frame_idx < max_frames:
 
     # rollout trajectory
     for _ in range(num_steps):
-        state = torch.FloatTensor(state).to(device)
-        dist, value = model(state)
+        state = torch.FloatTensor(state).to(device) # get a state from env
+        dist, value = model(state) # run the state through the network to get an action distribution and value of state
 
-        action = dist.sample()
-        next_state, reward, done, _ = envs.step(action.cpu().numpy())
+        action = dist.sample() # pick an action from the action distribution output by the model
+        next_state, reward, done, _ = envs.step(action.cpu().numpy()) # take the action, and get a new state and reward
 
-        log_prob = dist.log_prob(action)
-        entropy += dist.entropy().mean()
+        log_prob = dist.log_prob(action) # log prob of the action
+        entropy += dist.entropy().mean() # entropy
         
-        log_probs.append(log_prob)
-        values.append(value)
-        rewards.append(torch.FloatTensor(reward).unsqueeze(1).to(device))
+        log_probs.append(log_prob) # add the log prob to a list
+        values.append(value) # add a list of predicted values
+        rewards.append(torch.FloatTensor(reward).unsqueeze(1).to(device)) # add to a list of rewards
         masks.append(torch.FloatTensor(1 - done).unsqueeze(1).to(device))
         
         state = next_state
@@ -138,21 +138,23 @@ while frame_idx < max_frames:
             
     next_state = torch.FloatTensor(next_state).to(device)
     _, next_value = model(next_state)
-    returns = compute_returns(next_value, rewards, masks)
+    returns = compute_returns(next_value, rewards, masks) # computing returns = getting Q
     
     log_probs = torch.cat(log_probs)
     returns   = torch.cat(returns).detach()
     values    = torch.cat(values)
 
-    advantage = returns - values
+    advantage = returns - values # advantage function
 
-    actor_loss  = -(log_probs * advantage.detach()).mean()
-    critic_loss = advantage.pow(2).mean()
+    actor_loss  = -(log_probs * advantage.detach()).mean() # this is the eqn shown in notes for A2C = log_prob(action) * advantage function
+    critic_loss = advantage.pow(2).mean() # update the critic network with the advantage function
 
-    loss = actor_loss + 0.5 * critic_loss - 0.001 * entropy
+    loss = actor_loss + 0.5 * critic_loss - 0.001 * entropy # coefficients are considered as hyperparameters
 
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
 
 #test_env(True)
+
+# link explaining entropy: https://adventuresinmachinelearning.com/cross-entropy-kl-divergence/?fbclid=IwAR3sFnj5FATQgWTReEJ6sw5yxXh0KuCzRl1QlyR_WZhZBE-8AssQzPJpPhc

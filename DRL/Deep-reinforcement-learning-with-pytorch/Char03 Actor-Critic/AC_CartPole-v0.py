@@ -33,7 +33,7 @@ SavedAction = namedtuple('SavedAction', ['log_prob', 'value'])
 class Policy(nn.Module):
     def __init__(self):
         super(Policy, self).__init__()
-        # the network's architecture is input->32->action space, and input->32->state_value, whree the input layer and hidden layer (32) are shared 
+        # the network's architecture is input->32->action space, and input->32->state_value, where the input and hidden layer (32) are shared 
         self.fc1 = nn.Linear(state_space, 32)
 
         self.action_head = nn.Linear(32, action_space)
