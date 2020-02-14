@@ -146,8 +146,9 @@ while frame_idx < max_frames:
 
     advantage = returns - values # advantage function
 
-    actor_loss  = -(log_probs * advantage.detach()).mean() # this is the eqn shown in notes for A2C = log_prob(action) * advantage function
-    critic_loss = advantage.pow(2).mean() # update the critic network with the advantage function
+    actor_loss  = -(log_probs * advantage.detach()).mean() # this is the eqn shown in notes for A2C = -log_prob(action) * advantage function
+    critic_loss = advantage.pow(2).mean() # update the critic network (value loss), by using the mean squared loss of the advantage function
+                                          # comparing reward gained from one state to the value estimated for that state
 
     loss = actor_loss + 0.5 * critic_loss - 0.001 * entropy # coefficients are considered as hyperparameters
 
@@ -158,3 +159,4 @@ while frame_idx < max_frames:
 #test_env(True)
 
 # link explaining entropy: https://adventuresinmachinelearning.com/cross-entropy-kl-divergence/?fbclid=IwAR3sFnj5FATQgWTReEJ6sw5yxXh0KuCzRl1QlyR_WZhZBE-8AssQzPJpPhc
+# link explaining A2C: https://www.youtube.com/watch?v=O5BlozCJBSE
