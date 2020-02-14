@@ -90,6 +90,7 @@ if __name__ == "__main__":
                 optimizer.step()
                 # get full loss
                 loss_v += loss_policy_v
+                print("loss", loss_v)
 
                 tb_tracker.track("advantage",       adv_v, step_idx)
                 tb_tracker.track("values",          value_v, step_idx)

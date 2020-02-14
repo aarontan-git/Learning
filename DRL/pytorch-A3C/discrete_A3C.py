@@ -20,8 +20,8 @@ GAMMA = 0.9
 MAX_EP = 4000
 
 env = gym.make('CartPole-v0')
-N_S = env.observation_space.shape[0]
-N_A = env.action_space.n
+N_S = env.observation_space.shape[0] # 4 states
+N_A = env.action_space.n # 2 actions
 
 
 class Net(nn.Module):
@@ -92,7 +92,7 @@ class Worker(mp.Process):
 
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     # sync
-                    push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
+                    push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA) # calculate local gradient, and push local param to global network
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
     # parallel training
-    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(mp.cpu_count())]
+    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(mp.cpu_count())] # create multiple workers (32 in this case)
     [w.start() for w in workers]
     res = []                    # record episode reward to plot
     while True:

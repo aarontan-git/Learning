@@ -19,7 +19,7 @@ def set_init(layers):
         nn.init.constant_(layer.bias, 0.)
 
 
-def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
+def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma): # each worker updates the global network with this
     if done:
         v_s_ = 0.               # terminal
     else:
