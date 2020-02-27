@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\author{Aaron Hao Tan}
+\title{Reinforcement Learning Equations}
+\date{\vspace{-5ex}}
+
+\begin{document}
+\maketitle
+
+\noindent
+\textbf{Fininte Markov Decision Processes}
+
+\noindent
+Components of MDP
+\begin{equation}
+\left\{T, S, A_{s}, p_{t}(\cdot | s, a), r_{t}(s, a)\right\}
+\end{equation}
+
+\noindent
+A state is \textit{Markov} if and only if 
+
+\begin{equation}
+\mathbb{P}\left[S_{t+1} | S_{t}\right]=\mathbb{P}\left[S_{t+1} | S_{1}, \ldots, S_{t}\right]
+\end{equation}
+
+\noindent
+State-transition probabilities
+
+\begin{equation}
+p(s^{\prime} | s, a) \doteq Pr{S_{t}=s^{\prime} | S_{t-1}=s, A_{t-1}=a}=\sum_{r \in \mathcal{R}} p(s^{\prime}, r | s, a)
+\end{equation}
+
+\noindent
+Expected rewards for state-action pairs
+
+\begin{equation}
+r(s, a) \doteq \mathbb{E} \left[R_{t} | S_{t-1}=s, A_{t-1}=a\right]=\sum_{r \in \mathcal{R}} r \sum_{s^{\prime} \in \mathcal{S}} p\left(s^{\prime}, r | s, a\right)
+\end{equation}
+
+\noindent
+Returns
+\begin{equation}
+G_{t} \doteq R_{t+1}+R_{t+2}+R_{t+3}+\cdots+R_{T}
+\end{equation}
+
+\noindent
+Discounted Returns
+\begin{equation}
+G_{t} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\cdots=\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1}
+\end{equation}
+
+\noindent
+State Value Function and its Bellman Equations
+
+\begin{equation}
+v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s]=\mathbb{E}_{\pi}[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s] \quad for \quad all \quad s \in \mathcal{S}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+v_{\pi}(s) &= E_{\pi}[R_{t+1}+\gamma \cdot G_{t+1} | S_{t}=s] \\
+&= \sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p(s^{\prime}, r|s, a)[r+\gamma E_{\pi}[G_{t+1} | S_{t+1}=s^{\prime}]]\\
+&=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
+\end{aligned}
+\end{equation}
+
+\noindent
+Action Value Function and its Bellman Equations
+\begin{equation}
+q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s, A_{t}=a\right]=\mathbb{E}_{\pi}\left[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s, A_{t}=a\right]
+\end{equation}
+\begin{equation}
+q_{\pi}(s, a)=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \sum_{a^{\prime}} \pi\left(a^{\prime} | s^{\prime}\right) q_{\pi}\left(s^{\prime}, a^{\prime}\right)\right]
+\end{equation}
+
+\noindent
+Optimal State Value Function and ACtion Value Function
+
+\begin{equation}
+v_{*}(s) \doteq \max _{\pi} v_{\pi}(s)
+\end{equation}
+\begin{equation}
+q_{*}(s, a) \doteq \max _{\pi} q_{\pi}(s, a)
+\end{equation}
+
+\noindent
+Bellman Optimality Equations
+
+\begin{equation}
+\begin{aligned}
+v_{*}(s) & = \max _{a} \mathbb{E}\left[R_{t+1}+\gamma v_{*}\left(S_{t+1}\right) | S_{t}=s, A_{t}=a\right]\\
+&= \max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{*}\left(s^{\prime}\right)\right]
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+q_{*}(s, a)&=\mathbb{E}\left[R_{t+1}+\gamma \max _{a^{\prime}} q_{*}\left(S_{t+1}, a^{\prime}\right) | S_{t}=s, A_{t}=a\right] \\
+&=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \max _{a^{\prime}} q_{*}\left(s^{\prime}, a^{\prime}\right)\right]
+\end{aligned}
+\end{equation}
+
+\newpage
+\textbf{Policy and Value Iteration}
+
+\end{document}
