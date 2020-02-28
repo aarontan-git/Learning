@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1582845978 "/home/aaron/Documents/Hub/Learning/RL/theoretical/tex/equations.tex" "/home/aaron/Documents/Hub/Learning/RL/theoretical/tex/equations.pdf" "equations" 1582845979
+["pdflatex"] 1582904041 "/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.tex" "/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.pdf" "equations" 1582904041
   "/etc/texmf/web2c/texmf.cnf" 1574376390 1101 af7716885e081ab43982cab7b4672c1a ""
-  "/home/aaron/Documents/Hub/Learning/RL/theoretical/tex/equations.aux" 1582845979 8 a94a2480d3289e625eea47cd1b285758 ""
-  "/home/aaron/Documents/Hub/Learning/RL/theoretical/tex/equations.tex" 1582845976 3338 fdbd50cb61273cf5ea7190e077ee5449 ""
+  "/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux" 1582904041 8 a94a2480d3289e625eea47cd1b285758 ""
+  "/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.tex" 1582904039 3850 4eeefcd0944ca3a9e6704a2c2f8eedca ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -57,11 +57,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1574376397 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1574376409 3853697 85564044dc36a0cc01845a9a9d5042f2 ""
-  "equations.aux" 1582845979 8 a94a2480d3289e625eea47cd1b285758 ""
-  "equations.tex" 1582845976 3338 fdbd50cb61273cf5ea7190e077ee5449 ""
+  "equations.aux" 1582904041 8 a94a2480d3289e625eea47cd1b285758 ""
+  "equations.tex" 1582904039 3850 4eeefcd0944ca3a9e6704a2c2f8eedca ""
   (generated)
-  "/home/aaron/Documents/Hub/Learning/RL/theoretical/tex/equations.log"
-  "equations.pdf"
   "equations.aux"
+  "/home/aaron/Documents/Hub/Learning/RL/theoretical/tex/equations.log"
   "/home/aaron/Documents/Hub/Learning/RL/theoretical/tex/equations.pdf"
   "equations.log"
+  "equations.pdf"
+  "/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.pdf"
+  "/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.log"
