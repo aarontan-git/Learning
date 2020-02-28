@@ -54,7 +54,8 @@ r\left(s, a, s^{\prime}\right) \doteq \mathbb{E}\left[R_{t} | S_{t-1}=s, A_{t-1}
 \end{equation}
 
 \noindent
-Policy
+Policy\\
+- Probabilistic is inferior to deterministic
 
 \begin{equation}
 \pi(a | s)= Pr(A_{t} = a | S_{t}=s)
@@ -92,7 +93,7 @@ v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s]=\mathbb{E}_{\pi}[\sum_{k=0}^
 \noindent
 Bellman Equation for $v_{\pi}$: the value of the start state must equal the
 (discounted) value of the expected next state, plus the reward expected along
-the way.
+the way. Assumes discrete and is invariant of time (time doesn't matter).
 
 \begin{equation}
 \begin{aligned}
@@ -151,11 +152,16 @@ q_{*}(s, a) &\doteq \max _{\pi} q_{\pi}(s, a)\\
 \end{equation}
 
 \noindent
-Relationship between $q_{*}$ and $v_{*}$. The value of a state under an optimal
-policy must equal the expected return for the best action from that state.
-Second last line of equation 16 shows that $G_{t} = R_{t+1} + \gamma
-v_{*}(S_{t+1})$ when following $\pi_{*}$. The last line is the same as equation
-17. For finite MDPs, the last line of equation 16 has a unique solution.
+Relationship between $q_{*}$ and $v_{*}$. \\
+- The value of a state under an optimal policy must equal the expected return
+for the best action from that state. \\
+- Second last line of equation 16 shows that $G_{t} = R_{t+1} + \gamma
+v_{*}(S_{t+1})$ when following $\pi_{*}$. \\
+- The last line is the same as equation 17. For finite MDPs, the last line of
+equation 16 has a unique solution.\\
+- $R_{t+1}$ has nothing to do with policy because the first action was not taken
+with policy\\
+- $\max$ operator turns equation 16 in to a system of nonlinear equations
 
 \begin{equation}
 \begin{aligned}
@@ -196,5 +202,73 @@ reward. From the new state $s^{\prime}$, the best action is chosen.
 \centering
 \caption{Bellman Optimality Equations}
 \end{figure}
-    
+
+\noindent
+\textbf{Dynamic Programming}
+
+\noindent
+Policy Evaluation: turn Bellman equation from equation 11 in to an update rule.
+
+\begin{equation}
+\begin{aligned}
+v_{k+1}(s) & \doteq \mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{k}\left(S_{t+1}\right) | S_{t}=s\right] \\
+&=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{k}\left(s^{\prime}\right)\right]
+\end{aligned}
+\end{equation}
+
+\noindent
+Policy Improvement\\
+- greedy policy = guaranteed to be optimal\\
+- one-step greedy lookahead
+
+\begin{equation}
+\begin{aligned}
+\pi^{\prime}(s) & \doteq \underset{a}{\arg \max } q_{\pi}(s, a) \\
+&=\underset{a}{\arg \max } \mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) | S_{t}=s, A_{t}=a\right] \\
+&=\underset{a}{\arg \max } \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
+\end{aligned}
+\end{equation}
+
+\noindent
+Policy Iteration\\
+- built on the fundamentals of value iteration\\
+- more efficient (CPU time) than value iteration
+
+\begin{figure}[h]
+\includegraphics[scale=0.4]{policy_iteration}
+\centering
+\caption{Policy Iteration}
+\end{figure}
+
+\newpage
+\noindent
+Value Iteration\\
+- Policy iteration is faster because policy converges quicker
+than value functions\\
+- Bellman Optimality Equation (equation 17) turned in to an update rule \\
+- Value iteration update is identical to policy evaluation except that the max
+is taken over all actions\\
+- Formally requires infinite number of iterations to converge exactly to $v_{*}$
+but we stop before then \\
+- Only guarantees $\epsilon - optimality$ (theoretically)\\
+- All algorithms converge to an optimal policy for discounted finite MDPs\\
+- When $\gamma$ is close to 1, iteration goes forever = making value iteration
+inefficient\\
+- Policy iteration converges faster even for smaller $\gamma$
+
+\begin{equation}
+\begin{aligned}
+v_{k+1}(s) & \doteq \max _{a} \mathbb{E}\left[R_{t+1}+\gamma v_{k}\left(S_{t+1}\right) | S_{t}=s, A_{t}=a\right] \\
+&=\max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{k}\left(s^{\prime}\right)\right]
+\end{aligned}
+\end{equation}
+
+\begin{figure}[h]
+\includegraphics[scale=0.4]{value_iteration}
+\centering
+\caption{Value Iteration}
+\end{figure}
+
+
+
 \end{document}

@@ -110,6 +110,12 @@ INPUT ./pictures/value_functions.png
 INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/./pictures/bellman_optimality.png
 INPUT ./pictures/bellman_optimality.png
 INPUT ./pictures/bellman_optimality.png
+INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/./pictures/policy_iteration.png
+INPUT ./pictures/policy_iteration.png
+INPUT ./pictures/policy_iteration.png
+INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/./pictures/value_iteration.png
+INPUT ./pictures/value_iteration.png
+INPUT ./pictures/value_iteration.png
 INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
