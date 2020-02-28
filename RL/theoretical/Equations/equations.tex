@@ -207,7 +207,8 @@ reward. From the new state $s^{\prime}$, the best action is chosen.
 \textbf{Dynamic Programming}
 
 \noindent
-Policy Evaluation: turn Bellman equation from equation 11 in to an update rule.
+Policy Evaluation\\
+- turn Bellman equation from equation 11 in to an update rule
 
 \begin{equation}
 \begin{aligned}
@@ -215,6 +216,18 @@ v_{k+1}(s) & \doteq \mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{k}\left(S_{t+1}\righ
 &=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{k}\left(s^{\prime}\right)\right]
 \end{aligned}
 \end{equation}
+
+\noindent
+Policy Evaluation Steps\\
+- for state in states\\
+---- for action in actions available in each state\\
+-------- calculate value of state using equation 19 \\
+-------- (value = sum all values of each action together for each state (ie. 4
+actions in a state = 1 total value))\\
+---- replace old value of state with newly calculated value\\
+---- calculate the change in value of each state with only the maximum
+difference remembered\\
+- stop looping if the maximum change in state values falls below a threshold\\
 
 \noindent
 Policy Improvement\\
@@ -230,6 +243,33 @@ Policy Improvement\\
 \end{equation}
 
 \noindent
+Policy is represented $s \times a$ table where each row represents a state and
+each column represents an action. The value within each entry of the table
+represent the probability of taking that action, when in that state, using a
+probabilistic policy.\\
+
+\noindent
+At this stage, there is a value calculated for every state using policy
+evaluation already.\\
+
+\noindent
+Policy Improvement Steps\\
+- for state in states \\
+---- choose the best action with the current policy (argmax)\\
+---- for action in actions available in each state \\
+-------- calculate action values for each action using equation 20 without the
+argmax\\
+--------(this creates a $1 \times a$ vector where each element is an
+action value $q$)\\
+---- select the best action in the $ 1 \times a$ vector (equation 20 with
+argmax)\\
+---- if action chosen with the current policy is not the calculated best
+action\\
+-------- policy is unstable\\
+---- update the policy with the new best action\\
+
+\newpage
+\noindent
 Policy Iteration\\
 - built on the fundamentals of value iteration\\
 - more efficient (CPU time) than value iteration
@@ -240,14 +280,11 @@ Policy Iteration\\
 \caption{Policy Iteration}
 \end{figure}
 
-\newpage
 \noindent
 Value Iteration\\
 - Policy iteration is faster because policy converges quicker
 than value functions\\
 - Bellman Optimality Equation (equation 17) turned in to an update rule \\
-- Value iteration update is identical to policy evaluation except that the max
-is taken over all actions\\
 - Formally requires infinite number of iterations to converge exactly to $v_{*}$
 but we stop before then \\
 - Only guarantees $\epsilon - optimality$ (theoretically)\\
@@ -255,6 +292,11 @@ but we stop before then \\
 - When $\gamma$ is close to 1, iteration goes forever = making value iteration
 inefficient\\
 - Policy iteration converges faster even for smaller $\gamma$
+- Main difference between Value Iteration and Policy Iteration\\
+-- In value iteration, instead of summing values from all actions per state,
+take only the best action value per state as the value of that state\\
+- Value iteration update is identical to policy evaluation except that the max
+is taken over all actions\\
 
 \begin{equation}
 \begin{aligned}
@@ -263,6 +305,30 @@ v_{k+1}(s) & \doteq \max _{a} \mathbb{E}\left[R_{t+1}+\gamma v_{k}\left(S_{t+1}\
 \end{aligned}
 \end{equation}
 
+\noindent
+Value Iteration Steps \\
+- for state in states \\
+---- for action in actions available in each state \\
+-------- calculate action values for each action using equation 21 without the
+max\\
+--------(this creates a $1 \times a$ vector where each element is an
+action value $q$)\\
+---- value = the best action value in the $ 1 \times a$ vector (equation 21 with
+max)\\
+---- calculate the change in value of each state with only the maximum
+difference remembered\\
+- stop looping if the maximum change in state values falls below a threshold\\
+- for state in states\\
+---- for action in actions available in each state \\
+-------- calculate action values for each action using equation 21 without the
+max\\
+--------(this creates a $1 \times a$ vector where each element is an
+action value $q$)\\
+---- select the best action in the $ 1 \times a$ vector (equation 21 with
+argmax)\\
+---- overwrite policy table with best action
+
+\newpage
 \begin{figure}[h]
 \includegraphics[scale=0.4]{value_iteration}
 \centering
