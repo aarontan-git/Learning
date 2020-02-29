@@ -14,10 +14,11 @@
 \maketitle
 
 \noindent
-\textbf{Fininte Markov Decision Processes}
+\section{Finite Markov Decision Processes}
 
 \noindent
-Components of MDP: {Decision epochs, State, Action, Transition probability,
+\textbf{Components of MDP}
+: {Decision epochs, State, Action, Transition probability,
 Rewards}
 \begin{equation}
 \left\{T, S, A_{s}, p_{t}(\cdot | s, a), r_{t}(s, a)\right\}
@@ -31,7 +32,8 @@ A state is \textit{Markov} if and only if
 \end{equation}
 
 \noindent
-State-transition probabilities ($p$ characterize the environment's dynamics).
+\textbf{State-transition probabilities}
+($p$ characterize the environment's dynamics).
 More often used than equations 4 and 5.
 
 \begin{equation}
@@ -42,7 +44,8 @@ p(s^{\prime} | s, a) &= Pr [S_{t} = s^{\prime} | S_{t-1}=s, A_{t-1}=a] \\
 \end{equation}
 
 \noindent
-Expected rewards for state-action pairs and for state-action-next-state triples.
+\textbf{Expected rewards }
+for state-action pairs and for state-action-next-state triples.
 The current reward depends on the previous state and action.
 
 \begin{equation}
@@ -54,7 +57,8 @@ r\left(s, a, s^{\prime}\right) \doteq \mathbb{E}\left[R_{t} | S_{t-1}=s, A_{t-1}
 \end{equation}
 
 \noindent
-Policy\\
+\textbf{Policy }
+\\
 - Probabilistic is inferior to deterministic
 
 \begin{equation}
@@ -62,13 +66,14 @@ Policy\\
 \end{equation}
 
 \noindent
-Returns (sum of rewards)
+\textbf{Returns (sum of rewards) }
 \begin{equation}
 G_{t} \doteq R_{t+1}+R_{t+2}+R_{t+3}+\cdots+R_{T}
 \end{equation}
 
 \noindent
-Discounted Returns ($\gamma$ = discount rate). If $\gamma < 1$, the infinite sum
+\textbf{Discounted Returns }
+($\gamma$ = discount rate). If $\gamma < 1$, the infinite sum
 in equation 8 would have a finite value. If $\gamma = 0$, the agent is concerned
 with only maximizing immediate rewards (myopic). If the reward is +1, the return
 is equivalent to $G_{t}=\sum_{k=0}^{\infty} \gamma^{k}=\frac{1}{1-\gamma}$.
@@ -84,14 +89,19 @@ G_{t} & \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdo
 \end{equation}
 
 \noindent
-State Value Function. Value of terminal state (if any) is always zero.
+\textbf{State Value Function}\\
+- Value of terminal state (if any) is always zero.\\
+- The expected return (expected cumulative future discounted reward) starting
+from that state\\
 
 \begin{equation}
 v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s]=\mathbb{E}_{\pi}[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s] \quad \forall s \in S
 \end{equation}
 
+\newpage
 \noindent
-Bellman Equation for $v_{\pi}$: the value of the start state must equal the
+\textbf{Bellman Equation for $v_{\pi}$}
+: the value of the start state must equal the
 (discounted) value of the expected next state, plus the reward expected along
 the way. Assumes discrete and is invariant of time (time doesn't matter).
 
@@ -104,13 +114,13 @@ v_{\pi}(s) &= E_{\pi}[R_{t+1}+\gamma \cdot G_{t+1} | S_{t}=s] \\
 \end{equation}
 
 \noindent
-Action Value Function
+\textbf{Action Value Function}
 \begin{equation}
 q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s, A_{t}=a\right]=\mathbb{E}_{\pi}\left[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s, A_{t}=a\right]
 \end{equation}
 
 \noindent
-Bellman Equation for $q_{\pi}(s, a)$
+\textbf{Bellman Equation for $q_{\pi}(s, a)$}
 
 \begin{equation}
 q_{\pi}(s, a)=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \sum_{a^{\prime}} \pi\left(a^{\prime} | s^{\prime}\right) q_{\pi}\left(s^{\prime}, a^{\prime}\right)\right]
@@ -127,22 +137,23 @@ graphically.
 \end{figure}
 
 \noindent
-Optimal State Value Function. A policy $\pi$ is better
-or equal to another policy $\pi^{\prime}$ if its expected return is greater than
-or equal to that of $\pi^{\prime}$ for all states ($\pi^{\prime} \geq
-\pi^{\prime}$ if and only if $v_{\pi}(s) \geq v_{\pi^{\prime}}(s)$). 
+\textbf{Optimal State Value Function}
+A policy $\pi$ is better or equal to another policy $\pi^{\prime}$ if its
+expected return is greater than or equal to that of $\pi^{\prime}$ for all
+states ($\pi^{\prime} \geq \pi^{\prime}$ if and only if $v_{\pi}(s) \geq
+v_{\pi^{\prime}}(s)$). 
 
 \begin{equation}
 v_{*}(s) \doteq \max _{\pi} v_{\pi}(s)
 \end{equation}
 
 \noindent
-Optimal Action Value Function and its relation to $v_{*}$. Equation 15 gives the
-expected return for taking action a in state s and thereafter following an
-optimal policy. Comparing with equation 11, $v_{\pi}(s)$ represents the value of
-a state as the summation of future returns. In equation 15,
-$v_{*}\left(S_{t+1}\right)$ gives the optimal value of all future states from
-the given state and action.
+\textbf{Optimal Action Value Function and its relation to $v_{*}$}
+. Equation 15 gives the expected return for taking action a in state s and
+thereafter following an optimal policy. Comparing with equation 11, $v_{\pi}(s)$
+represents the value of a state as the summation of future returns. In equation
+15, $v_{*}\left(S_{t+1}\right)$ gives the optimal value of all future states
+from the given state and action.
 
 \begin{equation}
 \begin{aligned}
@@ -152,7 +163,7 @@ q_{*}(s, a) &\doteq \max _{\pi} q_{\pi}(s, a)\\
 \end{equation}
 
 \noindent
-Relationship between $q_{*}$ and $v_{*}$. \\
+\textbf{Relationship between $q_{*}$ and $v_{*}$}\\
 - The value of a state under an optimal policy must equal the expected return
 for the best action from that state. \\
 - Second last line of equation 16 shows that $G_{t} = R_{t+1} + \gamma
@@ -173,9 +184,9 @@ v_{*}(s) &=\max _{a \in A(s)} q_{*}(s, a)\\
 \end{aligned}
 \end{equation}
 
-
+\newpage
 \noindent
-Bellman Optimality Equations
+\textbf{Bellman Optimality Equations}\\
 
 \begin{equation}
 \begin{aligned}
@@ -191,7 +202,6 @@ q_{*}(s, a)&=\mathbb{E}\left[R_{t+1}+\gamma \max _{a^{\prime}} q_{*}\left(S_{t+1
 \end{aligned}
 \end{equation}
 
-\newpage
 \noindent
 In $v_{*}$, the next best action is selected based on the expected reward and
 value of future states. In $q_{*}$, the state and action is given as well as the
@@ -204,11 +214,12 @@ reward. From the new state $s^{\prime}$, the best action is chosen.
 \end{figure}
 
 \noindent
-\textbf{Dynamic Programming}
+\section{Dynamic Programming}
 
 \noindent
-Policy Evaluation\\
-- turn Bellman equation from equation 11 in to an update rule
+\textbf{Policy Evaluation}\\
+- turn Bellman equation from equation 11 in to an update rule\\
+- maximum bootstrapping: $v_{k}(s^{\prime})$ is using a previous estimate
 
 \begin{equation}
 \begin{aligned}
@@ -218,7 +229,7 @@ v_{k+1}(s) & \doteq \mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{k}\left(S_{t+1}\righ
 \end{equation}
 
 \noindent
-Policy Evaluation Steps\\
+\textbf{Policy Evaluation Steps}\\
 - for state in states\\
 ---- for action in actions available in each state\\
 -------- calculate value of state using equation 19 \\
@@ -229,8 +240,9 @@ actions in a state = 1 total value))\\
 difference remembered\\
 - stop looping if the maximum change in state values falls below a threshold\\
 
+\newpage
 \noindent
-Policy Improvement\\
+\textbf{Policy Improvement}\\
 - greedy policy = guaranteed to be optimal\\
 - one-step greedy lookahead
 
@@ -253,7 +265,7 @@ At this stage, there is a value calculated for every state using policy
 evaluation already.\\
 
 \noindent
-Policy Improvement Steps\\
+\textbf{Policy Improvement Steps}\\
 - for state in states \\
 ---- choose the best action with the current policy (argmax)\\
 ---- for action in actions available in each state \\
@@ -268,9 +280,8 @@ action\\
 -------- policy is unstable\\
 ---- update the policy with the new best action\\
 
-\newpage
 \noindent
-Policy Iteration\\
+\textbf{Policy Iteration}\\
 - built on the fundamentals of value iteration\\
 - more efficient (CPU time) than value iteration
 
@@ -280,8 +291,9 @@ Policy Iteration\\
 \caption{Policy Iteration}
 \end{figure}
 
+\newpage
 \noindent
-Value Iteration\\
+\textbf{Value Evaluation}\\
 - Policy iteration is faster because policy converges quicker
 than value functions\\
 - Bellman Optimality Equation (equation 17) turned in to an update rule \\
@@ -306,7 +318,7 @@ v_{k+1}(s) & \doteq \max _{a} \mathbb{E}\left[R_{t+1}+\gamma v_{k}\left(S_{t+1}\
 \end{equation}
 
 \noindent
-Value Iteration Steps \\
+\textbf{Value Iteration Steps}\\
 - for state in states \\
 ---- for action in actions available in each state \\
 -------- calculate action values for each action using equation 21 without the
@@ -328,13 +340,210 @@ action value $q$)\\
 argmax)\\
 ---- overwrite policy table with best action
 
-\newpage
 \begin{figure}[h]
-\includegraphics[scale=0.4]{value_iteration}
+\includegraphics[scale=0.3]{value_iteration}
 \centering
 \caption{Value Iteration}
 \end{figure}
 
+\newpage
+\noindent
+\section{Monte Carlo Methods}
+- Solving RL based on averaging sample returns\\
+- Return after taking an action in one state depends on the actions taken in
+later states in the same episode\\
+- No boot strapping (DP = max bootstrapping)\\
+- can be considered as a way to go from $\pi$ to $v$\\
+
+\noindent
+\textbf{First-visit MC Method}\\
+- average of the returns following first visit to $s$\\
+- more popular, samples are independent (faster convergence)\\
+- poor sample efficiency\\
+
+\noindent
+\textbf{Every-visit MC Method}\\
+- averages the returns following all visits to $s$\\
+- more natural to function approximation/eligibility traces\\
+- possibly statistically unstable\\
+
+\noindent
+The following shows first-visit MC methods.
+
+\begin{figure}[h]
+\includegraphics[scale=0.25]{firstvisit_mc}
+\centering
+\caption{First-visit MC Prediction}
+\end{figure}
+
+\noindent
+Problem with prior, there will only be one action from each state if following
+a deterministic policy. To fix this: \\
+- Look at state and action pairs as oppose to just states\\
+- Give all state action pair a nonzero probability of being selected (line 6)\\
+- Includes a greedy policy at the end to pick the best action in the next
+iteration (line 14)\\
+
+\begin{figure}[h]
+\includegraphics[scale=0.25]{exploringstart_mc}
+\centering
+\caption{Exploring Start MC Control}
+\end{figure}
+
+\newpage
+\noindent
+\textbf{On-policy vs Off-policy Methods}
+
+\noindent
+On-policy methods attempt to evaluate/improve the policy that is used to make
+decisions, whereas off-policy methods evaluate/improve a policy different from
+that used to generate data. On-policy approach is actually a compromise - it
+learns action values not for the optimal policy, but for a near optimal policy
+that still explores.\\
+- On-policy: unbiased, low bias and variance\\
+- Off-policy: biased, high bias and high variance. Slower to converge.\\
+
+\begin{figure}[h]
+\includegraphics[scale=0.4]{onpolicy_firstvisit_mc}
+\centering
+\caption{On-policy first-visit MC Control}
+\end{figure}
+
+\noindent
+\textbf{$\epsilon$ - greedy Exploration}\\
+- with probability $\epsilon$, select an action at random\\
+- all non-greedy actions are given the minimal probability of selection, $\frac{\varepsilon}{|\mathcal{A}(s)|}$\\
+- remaining bulk of probability is given to the greedy action,
+$1-\varepsilon+\frac{\varepsilon}{|\mathcal{A}(s)|}$ \\
+- the following equation either chooses the greedy action $A^{*}$ or not based on
+the probabilities stated
+
+\begin{equation}
+\pi\left(a | S_{t}\right) \leftarrow\left\{\begin{array}{ll}
+1-\varepsilon+\varepsilon /\left|\mathcal{A}\left(S_{t}\right)\right| & \text { if } a=A^{*} \\
+\varepsilon /\left|\mathcal{A}\left(S_{t}\right)\right| & \text { if } a \neq A^{*}
+\end{array}\right.
+\end{equation}
+
+\noindent
+\textbf{Off-policy Evaluation via Importance Sampling}\\
+- Target policy: policy being learned about\\
+- Behavior policy: policy used to generate behavior\\
+
+\noindent
+\textbf{Importance Sampling Ratio}
+
+\noindent
+In order to use episodes from $b$ to estimate values for $\pi$, we require that
+every action taken under $\pi$ is also taken, at least occasionally, under $b$.
+That is, the following is assumed to be true (known as \textit{coverage}).
+
+\begin{equation}
+\pi(a | s) > 0 \quad \text{implies} \quad b(a|s) > 0
+\end{equation}
+
+\noindent
+We apply importance sampling to off-policy learning by weighting returns
+according to the relative probability of their trajectories occurring under the
+target and behavior policies. For example, given a start state $S_{t}$, the
+probability of the subsequent state-action trajectory occuring under any policy
+$\pi$ is the following.
+
+\begin{equation}
+\begin{array}{l}
+\operatorname{Pr}\left\{A_{t}, S_{t+1}, A_{t+1}, \ldots, S_{T} | S_{t}, A_{t: T-1} \sim \pi\right\} \\
+\quad=\pi\left(A_{t} | S_{t}\right) p\left(S_{t+1} | S_{t}, A_{t}\right) \pi\left(A_{t+1} | S_{t+1}\right) \cdots p\left(S_{T} | S_{T-1}, A_{T-1}\right) \\
+\quad=\prod_{k=t}^{T-1} \pi\left(A_{k} | S_{k}\right) p\left(S_{k+1} | S_{k}, A_{k}\right)
+\end{array}
+\end{equation}
+
+\newpage
+\noindent
+The relative probability of the trajectory under the target and behavior
+policies is shown below. Note, the ratio depends on the policies and not on the
+MDP.
+
+\begin{equation}
+\rho_{t: T-1} \doteq \frac{\prod_{k=t}^{T-1} \pi\left(A_{k} | S_{k}\right) p\left(S_{k+1} | S_{k}, A_{k}\right)}{\prod_{k=t}^{T-1} b\left(A_{k} | S_{k}\right) p\left(S_{k+1} | S_{k}, A_{k}\right)}=\prod_{k=t}^{T-1} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}
+\end{equation}
+
+\noindent
+Convert returns $G_{t}$ due to the behavior policy to expected returns under the
+target policy.
+
+\begin{equation}
+\mathbb{E}\left[\rho_{t: T-1} G_{t} | S_{t}=s\right]=v_{\pi}(s)
+\end{equation}
+
+\noindent
+\textbf{Ordinary Importance Sampling}\\
+- $\mathcal{T}(s)$ represent the time steps in which state s is visited (number
+of samples that we have)\\
+- To estimate $v_{\pi}(s)$, simply scale the returns by the ratios and average
+the results\\
+- First visit: unbiased, high variance (unbounded)\\
+- Every visit: biased
+\begin{equation}
+V(s) \doteq \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1} G_{t}}{|\mathcal{T}(s)|}
+\end{equation}
+
+\noindent
+\textbf{Weighted Importance Sampling}\\
+- Weighted average\\
+- First visit: biased (though the bias converges asymptotically to zero), variance converges to zero\\
+- In practice, this method has dramatically lower variance and is preferred.\\
+- Every visit: biased
+\begin{equation}
+V(s) \doteq \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1} G_{t}}{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1}}
+\end{equation}
+
+\noindent
+\textbf{Comparison of Ordinary and Weighted}
+
+\noindent
+If you only have one sample, weighted importance would equal $G_{t}$ as the
+ratio in the numerator and denominator cancel out. For ordinary, the denominator
+would equal to 1, and the result is equivalent to $ISR * G_{t}$.\\
+
+\noindent
+\textbf{Incremental Implementation: Ordinary Importance Sampling}
+\begin{equation}
+V_{n}=\frac{\sum_{k=1}^{n-1} w_{k} G_{t}}{n-1}
+\end{equation}
+\begin{equation}
+V_{n+1}=V_{n}+\frac{1}{n}\left(w_{n} G_{n}-V_{n}\right)
+\end{equation}
+
+\noindent
+\textbf{Incremental Implementation: Weighted Importance Sampling}
+\begin{equation}
+V_{n}=\frac{\sum_{k=1}^{n-1} w_{k} G_{k}}{\sum_{k=1}^{n-1} w_{k}}
+\end{equation}
+\begin{equation}
+V_{n+1}=V_{n}+\frac{w_{n}}{C_{n}}\left[G_{n}-V_{n}\right]
+\end{equation}
+\begin{equation}
+C_{n+1}=C_{n}+w_{n+1}
+\end{equation}
+
+\newpage
+\noindent
+\textbf{Off-policy MC Prediction}
+
+\begin{figure}[h]
+\includegraphics[scale=0.25]{offpolicy_mc_prediction}
+\centering
+\caption{Off-policy MC Prediction}
+\end{figure}
+
+\noindent
+\textbf{Off-policy MC Control}
+
+\begin{figure}[h]
+\includegraphics[scale=0.25]{offpolicy_mc_control}
+\centering
+\caption{Off-policy MC Control}
+\end{figure}
 
 
 \end{document}
