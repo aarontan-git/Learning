@@ -92,10 +92,14 @@ G_{t} & \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdo
 \textbf{State Value Function}\\
 - Value of terminal state (if any) is always zero.\\
 - The expected return (expected cumulative future discounted reward) starting
-from that state\\
+from that state
 
 \begin{equation}
-v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s]=\mathbb{E}_{\pi}[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s] \quad \forall s \in S
+\begin{aligned}
+v_{\pi}(s) &\doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s]=\mathbb{E}_{\pi}[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s] \quad \forall s \in S\\
+&=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1} | S_{t}=s\right] \\
+&=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) | S_{t}=s\right]
+\end{aligned}
 \end{equation}
 
 \newpage
@@ -346,6 +350,11 @@ argmax)\\
 \caption{Value Iteration}
 \end{figure}
 
+\noindent
+\textbf{Summary of Policy and Value Iteration}\\
+- Value Iteration: Find optimal value, then extract optimal policy\\
+- Policy Iteration: Find value, then extract optimal policy\\
+
 \newpage
 \noindent
 \section{Monte Carlo Methods}
@@ -581,6 +590,123 @@ What does the last two line of the following pseudo-code mean?
 \newpage
 \noindent
 \section{Temporal-Difference Learning}
+
+\noindent
+\textbf{TD vs MC}\\
+
+\noindent
+TD:\\
+- Biased samples because of bootstrapping\\
+- Learn after transition: implemented in online - fully incremental fashion\\
+- Learn from incomplete episode (used in continuing task)\\
+- Sensitive to initial values (initialization of V or Q)\\
+- More efficient: in practice, converge faster than MC\\
+
+\noindent
+MC:\\
+- Solely dependent on environment\\
+- No bias, high variance\\
+- Learn at the end of episode: delayed learning\\
+- Only used with episodic tasks\\
+- Insensitive to initial values\\
+
+\noindent
+When sample size is finite, may converge to different values.\\
+
+\noindent
+\textbf{Monte Carlo (every visit) - Prediction}
+: need $G_{t}$ (obtained at the end of the episode) to perform update
+
+\begin{equation}
+V\left(S_{t}\right) \leftarrow V\left(S_{t}\right)+\alpha\left[G_{t}-V\left(S_{t}\right)\right]
+\end{equation}
+
+\noindent
+\textbf{Temporal Difference TD(0) - Prediction}
+: need just the next reward $R_{t+1}+\gamma V\left(S_{t+1}\right)$ to perform
+update
+
+\begin{equation}
+V\left(S_{t}\right) \leftarrow V\left(S_{t}\right)+\alpha\left[R_{t+1}+\gamma V\left(S_{t+1}\right)-V\left(S_{t}\right)\right]
+\end{equation}
+
+\noindent
+where the TD error is 
+
+\begin{equation}
+\delta_{t} \doteq R_{t+1}+\gamma V\left(S_{t+1}\right)-V\left(S_{t}\right)
+\end{equation}
+
+\begin{figure}[h]
+\includegraphics[scale=0.4]{onestep_td}
+\centering
+\caption{One step TD}
+\end{figure}
+
+\noindent
+\textbf{SARSA: On-policy TD Control}\\
+- Learn an action-value function ($q_{\pi}(s, a)$) rather than a state-value function\\
+- Consider transitions from state-action pair to state-action pair, as oppose to
+state to state\\
+
+\begin{figure}[h]
+\includegraphics[scale=0.5]{sarsa_diagram}
+\centering
+\caption{SARSA Diagram}
+\end{figure}
+
+\newpage
+\noindent
+\textbf{SARSA Update}
+
+\begin{equation}
+Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma Q\left(S_{t+1}, A_{t+1}\right)-Q\left(S_{t}, A_{t}\right)\right]
+\end{equation}
+
+\noindent
+- In the code below, line 8 is where the policy is being optimized (choosing the
+next best action based on the state arrived). Note, this code only returns $Q$
+and not $Q^{*}$.\\
+- On policy because it estimates the return for state action pairs assuming the
+current policy continues to be followed. Same policy is used to transition and
+also update.
+
+\begin{figure}[h]
+\includegraphics[scale=0.4]{onpolicy_sarsa}
+\centering
+\caption{SARSA: On-policy TD Control}
+\end{figure}
+
+\noindent
+\textbf{Q-learning: Off-policy Control}\\
+- Instead of choosing $A^{\prime}$ from an $\epsilon-greedy$ policy like in
+SARSA, choose the best action with $\max$. \\
+- Off policy because Q value is updated using the Q value of the next state and
+greedy action. In other words, it estimates the return for $Q(s,a)$ assuming a
+greedy policy were followed but is not actually following a greedy policy. One
+policy to choose A and another to update Q. If the policy used to choose A is
+greedy, the distinction between the two disappears.\\
+- Behavior policy is the $\epsilon-greedy$\\
+- Convergence is guaranteed under \textit{Robinson-Mouro Condition}
+
+\begin{equation}
+Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma \max _{a} Q\left(S_{t+1}, a\right)-Q\left(S_{t}, A_{t}\right)\right]
+\end{equation}
+
+\begin{figure}[h]
+\includegraphics[scale=0.4]{offpolicy_qlearning}
+\centering
+\caption{Q-learning: Off-policy TD Control}
+\end{figure}
+
+\newpage
+\noindent
+\section{$n$-step Bootstrapping}
+
+
+
+
+
 
 
 

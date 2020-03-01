@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.21)  1 MAR 2020 12:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.21)  1 MAR 2020 14:41
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -234,142 +234,187 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Try loading font information for U+msb on input line 14.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 10000) in paragraph at lines 91--96
-
- []
-
-[1
+) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] <./pictures/value_functions.png, id=20, 407.5225pt x 184.69pt>
 File: ./pictures/value_functions.png Graphic file (type png)
  <use ./pictures/value_functions.png>
-Package pdftex.def Info: ./pictures/value_functions.png used on input line 134.
+Package pdftex.def Info: ./pictures/value_functions.png used on input line 138.
 (pdftex.def)             Requested size: 203.76074pt x 92.34476pt.
  [2 <./pictures/value_functions.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 188--190
+Underfull \hbox (badness 10000) in paragraph at lines 192--194
 
  []
 
 <./pictures/bellman_optimality.png, id=24, 526.96875pt x 162.6075pt>
 File: ./pictures/bellman_optimality.png Graphic file (type png)
  <use ./pictures/bellman_optimality.png>
-Package pdftex.def Info: ./pictures/bellman_optimality.png used on input line 211.
+Package pdftex.def Info: ./pictures/bellman_optimality.png used on input line 215.
 (pdftex.def)             Requested size: 263.48372pt x 81.30354pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 231--242
+Underfull \hbox (badness 10000) in paragraph at lines 235--246
 
  []
 
 [3 <./pictures/bellman_optimality.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 257--262
+Underfull \hbox (badness 10000) in paragraph at lines 261--266
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 263--266
+Underfull \hbox (badness 10000) in paragraph at lines 267--270
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 267--282
+Underfull \hbox (badness 10000) in paragraph at lines 271--286
 
  []
 
 <./pictures/policy_iteration.png, id=28, 878.28125pt x 600.2425pt>
 File: ./pictures/policy_iteration.png Graphic file (type png)
  <use ./pictures/policy_iteration.png>
-Package pdftex.def Info: ./pictures/policy_iteration.png used on input line 289.
+Package pdftex.def Info: ./pictures/policy_iteration.png used on input line 293.
 (pdftex.def)             Requested size: 351.30627pt x 240.09274pt.
  [4 <./pictures/policy_iteration.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 295--312
+Underfull \hbox (badness 10000) in paragraph at lines 299--316
 
  []
 
 <./pictures/value_iteration.png, id=32, 875.27pt x 406.51875pt>
 File: ./pictures/value_iteration.png Graphic file (type png)
  <use ./pictures/value_iteration.png>
-Package pdftex.def Info: ./pictures/value_iteration.png used on input line 344.
+Package pdftex.def Info: ./pictures/value_iteration.png used on input line 348.
 (pdftex.def)             Requested size: 306.34909pt x 142.28369pt.
- [5 <./pictures/value_iteration.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 352--357
+
+Underfull \hbox (badness 10000) in paragraph at lines 353--357
+
+ []
+
+[5 <./pictures/value_iteration.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 361--366
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 358--363
+Underfull \hbox (badness 10000) in paragraph at lines 367--372
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 364--369
+Underfull \hbox (badness 10000) in paragraph at lines 373--378
 
  []
 
 <./pictures/firstvisit_mc.png, id=36, 1311.90125pt x 581.17125pt>
 File: ./pictures/firstvisit_mc.png Graphic file (type png)
  <use ./pictures/firstvisit_mc.png>
-Package pdftex.def Info: ./pictures/firstvisit_mc.png used on input line 374.
+Package pdftex.def Info: ./pictures/firstvisit_mc.png used on input line 383.
 (pdftex.def)             Requested size: 327.9745pt x 145.29245pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 379--388
+Underfull \hbox (badness 10000) in paragraph at lines 388--397
 
  []
 
 <./pictures/exploringstart_mc.png, id=37, 1315.91624pt x 709.65125pt>
 File: ./pictures/exploringstart_mc.png Graphic file (type png)
  <use ./pictures/exploringstart_mc.png>
-Package pdftex.def Info: ./pictures/exploringstart_mc.png used on input line 390.
+Package pdftex.def Info: ./pictures/exploringstart_mc.png used on input line 399.
 (pdftex.def)             Requested size: 328.97826pt x 177.41237pt.
  [6 <./pictures/firstvisit_mc.png> <./pictures/exploringstart_mc.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 399--407
+Underfull \hbox (badness 10000) in paragraph at lines 408--416
 
  []
 
 <./pictures/onpolicy_firstvisit_mc.png, id=41, 876.27374pt x 557.08125pt>
 File: ./pictures/onpolicy_firstvisit_mc.png Graphic file (type png)
  <use ./pictures/onpolicy_firstvisit_mc.png>
-Package pdftex.def Info: ./pictures/onpolicy_firstvisit_mc.png used on input line 409.
+Package pdftex.def Info: ./pictures/onpolicy_firstvisit_mc.png used on input line 418.
 (pdftex.def)             Requested size: 350.50328pt x 222.82855pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 430--436
+Underfull \hbox (badness 10000) in paragraph at lines 439--445
 
  []
 
 [7 <./pictures/onpolicy_firstvisit_mc.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 512--518
+Underfull \hbox (badness 10000) in paragraph at lines 521--527
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 528--532
+Underfull \hbox (badness 10000) in paragraph at lines 537--541
 
  []
 
 [8] <./pictures/offpolicy_mc_prediction.png, id=50, 1314.9125pt x 723.70375pt>
 File: ./pictures/offpolicy_mc_prediction.png Graphic file (type png)
  <use ./pictures/offpolicy_mc_prediction.png>
-Package pdftex.def Info: ./pictures/offpolicy_mc_prediction.png used on input line 564.
+Package pdftex.def Info: ./pictures/offpolicy_mc_prediction.png used on input line 573.
 (pdftex.def)             Requested size: 328.72733pt x 180.92549pt.
  <./pictures/offpolicy_mc_control.png, id=51, 1313.90875pt x 798.985pt>
 File: ./pictures/offpolicy_mc_control.png Graphic file (type png)
  <use ./pictures/offpolicy_mc_control.png>
-Package pdftex.def Info: ./pictures/offpolicy_mc_control.png used on input line 576.
+Package pdftex.def Info: ./pictures/offpolicy_mc_control.png used on input line 585.
 (pdftex.def)             Requested size: 328.47638pt x 199.74576pt.
- [9 <./pictures/offpolicy_mc_prediction.png> <./pictures/offpolicy_mc_control.png>] [10] (/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux) ) 
+ [9 <./pictures/offpolicy_mc_prediction.png> <./pictures/offpolicy_mc_control.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 594--596
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 597--604
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 605--612
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 613--615
+
+ []
+
+<./pictures/onestep_td.png, id=55, 878.28125pt x 387.4475pt>
+File: ./pictures/onestep_td.png Graphic file (type png)
+ <use ./pictures/onestep_td.png>
+Package pdftex.def Info: ./pictures/onestep_td.png used on input line 641.
+(pdftex.def)             Requested size: 351.30627pt x 154.97624pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 646--651
+
+ []
+
+<./pictures/sarsa_diagram.png, id=56, 636.3775pt x 56.21pt>
+File: ./pictures/sarsa_diagram.png Graphic file (type png)
+ <use ./pictures/sarsa_diagram.png>
+Package pdftex.def Info: ./pictures/sarsa_diagram.png used on input line 653.
+(pdftex.def)             Requested size: 318.18797pt x 28.10492pt.
+ [10 <./pictures/onestep_td.png> <./pictures/sarsa_diagram.png>] <./pictures/onpolicy_sarsa.png, id=60, 879.285pt x 386.44376pt>
+File: ./pictures/onpolicy_sarsa.png Graphic file (type png)
+ <use ./pictures/onpolicy_sarsa.png>
+Package pdftex.def Info: ./pictures/onpolicy_sarsa.png used on input line 675.
+(pdftex.def)             Requested size: 351.70778pt x 154.57475pt.
+ <./pictures/offpolicy_qlearning.png, id=61, 875.27pt x 358.33875pt>
+File: ./pictures/offpolicy_qlearning.png Graphic file (type png)
+ <use ./pictures/offpolicy_qlearning.png>
+Package pdftex.def Info: ./pictures/offpolicy_qlearning.png used on input line 697.
+(pdftex.def)             Requested size: 350.10179pt x 143.33296pt.
+ [11 <./pictures/onpolicy_sarsa.png> <./pictures/offpolicy_qlearning.png>] [12] (/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux) ) 
 Here is how much of TeX's memory you used:
- 2701 strings out of 493029
- 38258 string characters out of 6136233
+ 2726 strings out of 493029
+ 38949 string characters out of 6136233
  110284 words of memory out of 5000000
- 6191 multiletter control sequences out of 15000+600000
- 11542 words of font info for 45 fonts, out of 8000000 for 9000
+ 6212 multiletter control sequences out of 15000+600000
+ 12789 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,10n,32p,356b,221s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.pdf (10 pages, 853367 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.pdf (12 pages, 1034781 bytes).
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
+ 120 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
