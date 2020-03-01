@@ -449,7 +449,8 @@ exploratory.\\
 \noindent
 In order to use episodes from $b$ to estimate values for $\pi$, we require that
 every action taken under $\pi$ is also taken, at least occasionally, under $b$.
-That is, the following is assumed to be true (known as \textit{coverage}).
+That is, the following is assumed to be true (known as \textit{coverage}). ISR
+eliminates bias from sample so that we can use unbiased samples for learning.
 
 \begin{equation}
 \pi(a | s) > 0 \quad \text{implies} \quad b(a|s) > 0
@@ -702,13 +703,150 @@ Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{
 \newpage
 \noindent
 \section{$n$-step Bootstrapping}
+- Bootstrapping works best if it is over a length of time in which a significant
+and recognizable state change has occurred \\
+- Eligibility traces: enable bootstrapping over multiple time intervals
+simultaneously \\
+- 2 step update = based on the first 2 rewards and the estimated value of teh
+state 2 steps later\\
 
+\begin{figure}[h]
+\includegraphics[scale=0.3]{nstep}
+\centering
+\caption{n-step Methods}
+\end{figure}
 
+\noindent
+\textbf{Monte Carlo Return}
+\begin{equation}
+G_{t} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\cdots+\gamma^{T-t-1} R_{T}
+\end{equation}
 
+\noindent
+\textbf{One Step Return}
+\begin{equation}
+G_{t: t+1} \doteq R_{t+1}+\gamma V_{t}\left(S_{t+1}\right)
+\end{equation}
 
+\noindent
+\textbf{Two Step Return}
+\begin{equation}
+G_{t: t+2} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} V_{t+1}\left(S_{t+2}\right)
+\end{equation}
 
+\noindent
+\textbf{n-step Return}
+\begin{equation}
+G_{t: t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} V_{t+n-1}\left(S_{t+n}\right)
+\end{equation}
 
+\noindent
+\textbf{$n$-step TD Prediction}\\
+- Line 15: adding up the rewards\\
+- Example: $t = 3, n = 2, \tau = 2, G = \sum_{i=3}^{min(4, T)} = R_{3} + \gamma R_{4} + \gamma^{2} V(S_{4})$
+\begin{figure}[h]
+\includegraphics[scale=0.4]{nstep_td}
+\centering
+\caption{n-step TD Prediction}
+\end{figure}
 
+\newpage
+\noindent
+\textbf{$n$-step SARSA}
+
+\noindent
+Switch states for state-action pairs and then use $\epsilon - greedy$ policy.
+Given t+1, t+n-1, t+n, what is the time of learning? Should be at time t.
+
+\begin{equation}
+G_{t: t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), \quad n \geq 1,0 \leq t<T-n
+\end{equation}
+
+\noindent
+Similar to equation 37, the following is the update rule for n-step SARSA
+
+\begin{equation}
+Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t: t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t<T
+\end{equation}
+
+\noindent
+- $n$-step SARSA = SARARARAR...SA\\
+- $\tau < 0$ = means not enough observations (less than $n$ observations)\\
+- need at least $n$ samples/steps to begin learning\\
+- learning happens from \textbf{if $\tau \geq 0$}
+
+\begin{figure}[h]
+\includegraphics[scale=0.4]{nstep_sarsa}
+\centering
+\caption{n-step SARSA}
+\end{figure}
+    
+\newpage
+\noindent
+\textbf{$n$-step Off-policy Learning}
+
+\noindent
+\textbf{Off-policy n-step TD}
+
+\noindent
+$a_{t}$ is where deviation begins, and $a_{t+n-1}$ is where deviation ends.
+$a_{t+n}$ and $s_{t+n}$ are not taken (not used for learning) but they are
+needed to calculate $G_{t:t+n}$.
+
+\begin{equation}
+V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha \rho_{t: t+n-1}\left[G_{t: t+n}-V_{t+n-1}\left(S_{t}\right)\right], \quad 0 \leq t<T
+\end{equation}
+\begin{figure}[h]
+\includegraphics[scale=0.4]{offpolicy_nstep_td_diagram}
+\centering
+\caption{n-step Off-policy n-step TD}
+\end{figure}
+
+\noindent
+\textbf{Importance Sampling Ratio}
+\begin{equation}
+\rho_{t: h} \doteq \prod_{k=t}^{\min (h, T-1)} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}
+\end{equation}
+
+\noindent
+\textbf{Off-policy n-step SARSA}
+
+\noindent
+Note, the ratio starts and ends one step later than off-policy n-step TD
+(equation 45) because the first action $a_{t}$ was given. This is because we are
+updating a state-action pair. When updating a value function, the last action is
+not taken under policy. When updating a state-action pair, the last action was
+taken with behavior policy. In other words, we do not care how likely we were to
+select the action; now that we have selected it we want to learn fully from what
+happens, with importance sampling only for subsequent actions.
+\begin{equation}
+Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha \rho_{t+1: t+n}\left[G_{t: t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right]
+\end{equation}
+
+\noindent
+There is a typo in the code below where $\rho$ is calculated. Instead of summing
+from $\tau + 1$ to $\tau + n -1$ in line 20, should just be $\tau + n$ as
+described in equation 47 (the index shift). The last action is chosen by the
+behavior policy and therefore should be included in the importance sampling
+ratio's consideration.
+
+One can convert the following code to Q-learning by adding $\max Q(s_{t+n}, a)$
+to line 22 like in equation 38. In this case, the previous typo is no longer a
+mistake. Normally, in Q-learning, you do not need importance sampling ratio. But
+in n-step, there are n-transitions in which importance sampling ratio must be
+applied to until the last action which would be chosen by the greedy operator
+(behavior policy does not matter for the last action so ISR does not need to be
+applied). Additionally, $\rho$ is applied to $G - Q$ instead of just $G$ is
+because of the way the incremental implementation works.
+
+\begin{figure}[h]
+\includegraphics[scale=0.35]{nstep_offpolicy_sarsa}
+\centering
+\caption{n-step Off-policy SARSA}
+\end{figure}
+
+\newpage
+\section{Eligibility Trace}
 
 
 \end{document}
