@@ -341,7 +341,7 @@ argmax)\\
 ---- overwrite policy table with best action
 
 \begin{figure}[h]
-\includegraphics[scale=0.3]{value_iteration}
+\includegraphics[scale=0.35]{value_iteration}
 \centering
 \caption{Value Iteration}
 \end{figure}
@@ -383,6 +383,8 @@ a deterministic policy. To fix this: \\
 - Give all state action pair a nonzero probability of being selected (line 6)\\
 - Includes a greedy policy at the end to pick the best action in the next
 iteration (line 14)\\
+- Cons: this solution is unlikely to learn from real experiences but simulated
+episodes are fine\\
 
 \begin{figure}[h]
 \includegraphics[scale=0.25]{exploringstart_mc}
@@ -427,8 +429,10 @@ the probabilities stated
 
 \noindent
 \textbf{Off-policy Evaluation via Importance Sampling}\\
-- Target policy: policy being learned about\\
-- Behavior policy: policy used to generate behavior\\
+- Target policy: policy being learned about. Becomes deterministic (greedy)
+optimal policy.\\
+- Behavior policy: policy used to generate behavior. Remains stochastic and more
+exploratory.\\
 
 \noindent
 \textbf{Importance Sampling Ratio}
@@ -447,7 +451,8 @@ We apply importance sampling to off-policy learning by weighting returns
 according to the relative probability of their trajectories occurring under the
 target and behavior policies. For example, given a start state $S_{t}$, the
 probability of the subsequent state-action trajectory occuring under any policy
-$\pi$ is the following.
+$\pi$ is the following. Note, $A_{T}$ will take agent to $S_{T+1}$ which is pass
+terminal state.
 
 \begin{equation}
 \begin{array}{l}
@@ -461,7 +466,7 @@ $\pi$ is the following.
 \noindent
 The relative probability of the trajectory under the target and behavior
 policies is shown below. Note, the ratio depends on the policies and not on the
-MDP.
+MDP. Note, $\rho_{t: T-1}$ is a scalar value.
 
 \begin{equation}
 \rho_{t: T-1} \doteq \frac{\prod_{k=t}^{T-1} \pi\left(A_{k} | S_{k}\right) p\left(S_{k+1} | S_{k}, A_{k}\right)}{\prod_{k=t}^{T-1} b\left(A_{k} | S_{k}\right) p\left(S_{k+1} | S_{k}, A_{k}\right)}=\prod_{k=t}^{T-1} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}
@@ -477,10 +482,14 @@ target policy.
 
 \noindent
 \textbf{Ordinary Importance Sampling}\\
-- $\mathcal{T}(s)$ represent the time steps in which state s is visited (number
-of samples that we have)\\
+- $\mathcal{T}(s)$ represent the time steps in which state s is visited (norm =
+total number of samples)\\
 - To estimate $v_{\pi}(s)$, simply scale the returns by the ratios and average
 the results\\
+- $\left\{G_{t}\right\}_{t \in \mathcal{T}(s)}$ are the returns that pertain to
+state $s$ \\
+- $\left\{\rho_{t: T(t)-1}\right\}_{t \in \mathcal{T}(s)}$ are the corresponding
+ratios\\
 - First visit: unbiased, high variance (unbounded)\\
 - Every visit: biased
 \begin{equation}
@@ -503,32 +512,53 @@ V(s) \doteq \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1} G_{t}}{\sum_{t \i
 \noindent
 If you only have one sample, weighted importance would equal $G_{t}$ as the
 ratio in the numerator and denominator cancel out. For ordinary, the denominator
-would equal to 1, and the result is equivalent to $ISR * G_{t}$.\\
+would equal to 1, and the result is equivalent to $\rho_{t: T(t)-1} G_{t}$. If
+the ratio was 10, which indicates that the trajectory observed is 10 times as
+likely under the target policy as under the behavior policy.\\
 
 \noindent
 \textbf{Incremental Implementation: Ordinary Importance Sampling}
 \begin{equation}
-V_{n}=\frac{\sum_{k=1}^{n-1} w_{k} G_{t}}{n-1}
+V_{n}=\frac{\sum_{k=1}^{n-1} W_{k} G_{t}}{n-1}
 \end{equation}
 \begin{equation}
-V_{n+1}=V_{n}+\frac{1}{n}\left(w_{n} G_{n}-V_{n}\right)
+V_{n+1}=V_{n}+\frac{1}{n}\left(W_{n} G_{n}-V_{n}\right)
 \end{equation}
 
 \noindent
-\textbf{Incremental Implementation: Weighted Importance Sampling}
+\textbf{Incremental Implementation: Weighted Importance Sampling}\\
+- $W_{i}=\rho_{t_{i}: T\left(t_{i}\right)-1}$\\
+- $G_{1}, G_{2}, \dots, G_{n-1}$\\
+
+\noindent
+To estimate the following, 
 \begin{equation}
-V_{n}=\frac{\sum_{k=1}^{n-1} w_{k} G_{k}}{\sum_{k=1}^{n-1} w_{k}}
+V_{n}=\frac{\sum_{k=1}^{n-1} W_{k} G_{k}}{\sum_{k=1}^{n-1} W_{k}}
 \end{equation}
+
+\noindent
+Need to keep $V$ up to date as we obtain a single additional return $G_{n}$.
+
 \begin{equation}
-V_{n+1}=V_{n}+\frac{w_{n}}{C_{n}}\left[G_{n}-V_{n}\right]
+V_{n+1}=V_{n}+\frac{W_{n}}{C_{n}}\left[G_{n}-V_{n}\right]
 \end{equation}
+
+\noindent
+In addition to keeping track of $V_{n}$, must also maintain a cumulative sum of
+the weights $C_{n}$ given to the first $n$ returns
+
 \begin{equation}
-C_{n+1}=C_{n}+w_{n+1}
+C_{n+1}=C_{n}+W_{n+1}
 \end{equation}
 
 \newpage
 \noindent
 \textbf{Off-policy MC Prediction}
+
+\noindent
+- Off-policy with weighted importance sampling\\ 
+- Can be applied to on-policy by choosing the target and behavior policies the
+same ($\pi = b$) and $W = 1$ where $W$ is the importance sampling ratio.
 
 \begin{figure}[h]
 \includegraphics[scale=0.25]{offpolicy_mc_prediction}
@@ -539,11 +569,20 @@ C_{n+1}=C_{n}+w_{n+1}
 \noindent
 \textbf{Off-policy MC Control}
 
+\noindent
+What does the last two line of the following pseudo-code mean?
+
 \begin{figure}[h]
 \includegraphics[scale=0.25]{offpolicy_mc_control}
 \centering
 \caption{Off-policy MC Control}
 \end{figure}
+
+\newpage
+\noindent
+\section{Temporal-Difference Learning}
+
+
 
 
 \end{document}

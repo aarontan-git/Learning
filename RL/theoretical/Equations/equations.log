@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.21)  29 FEB 2020 18:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.21)  1 MAR 2020 12:26
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -290,7 +290,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 295--312
 File: ./pictures/value_iteration.png Graphic file (type png)
  <use ./pictures/value_iteration.png>
 Package pdftex.def Info: ./pictures/value_iteration.png used on input line 344.
-(pdftex.def)             Requested size: 262.58302pt x 121.95656pt.
+(pdftex.def)             Requested size: 306.34909pt x 142.28369pt.
  [5 <./pictures/value_iteration.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 352--357
 
@@ -312,46 +312,51 @@ File: ./pictures/firstvisit_mc.png Graphic file (type png)
 Package pdftex.def Info: ./pictures/firstvisit_mc.png used on input line 374.
 (pdftex.def)             Requested size: 327.9745pt x 145.29245pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 379--386
+Underfull \hbox (badness 10000) in paragraph at lines 379--388
 
  []
 
 <./pictures/exploringstart_mc.png, id=37, 1315.91624pt x 709.65125pt>
 File: ./pictures/exploringstart_mc.png Graphic file (type png)
  <use ./pictures/exploringstart_mc.png>
-Package pdftex.def Info: ./pictures/exploringstart_mc.png used on input line 388.
+Package pdftex.def Info: ./pictures/exploringstart_mc.png used on input line 390.
 (pdftex.def)             Requested size: 328.97826pt x 177.41237pt.
  [6 <./pictures/firstvisit_mc.png> <./pictures/exploringstart_mc.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 397--405
+Underfull \hbox (badness 10000) in paragraph at lines 399--407
 
  []
 
 <./pictures/onpolicy_firstvisit_mc.png, id=41, 876.27374pt x 557.08125pt>
 File: ./pictures/onpolicy_firstvisit_mc.png Graphic file (type png)
  <use ./pictures/onpolicy_firstvisit_mc.png>
-Package pdftex.def Info: ./pictures/onpolicy_firstvisit_mc.png used on input line 407.
+Package pdftex.def Info: ./pictures/onpolicy_firstvisit_mc.png used on input line 409.
 (pdftex.def)             Requested size: 350.50328pt x 222.82855pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 428--432
+Underfull \hbox (badness 10000) in paragraph at lines 430--436
 
  []
 
 [7 <./pictures/onpolicy_firstvisit_mc.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 503--507
+Underfull \hbox (badness 10000) in paragraph at lines 512--518
 
  []
 
-[8] <./pictures/offpolicy_mc_prediction.png, id=49, 1314.9125pt x 723.70375pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 528--532
+
+ []
+
+[8] <./pictures/offpolicy_mc_prediction.png, id=50, 1314.9125pt x 723.70375pt>
 File: ./pictures/offpolicy_mc_prediction.png Graphic file (type png)
  <use ./pictures/offpolicy_mc_prediction.png>
-Package pdftex.def Info: ./pictures/offpolicy_mc_prediction.png used on input line 534.
+Package pdftex.def Info: ./pictures/offpolicy_mc_prediction.png used on input line 564.
 (pdftex.def)             Requested size: 328.72733pt x 180.92549pt.
- <./pictures/offpolicy_mc_control.png, id=50, 1313.90875pt x 798.985pt>
+ <./pictures/offpolicy_mc_control.png, id=51, 1313.90875pt x 798.985pt>
 File: ./pictures/offpolicy_mc_control.png Graphic file (type png)
  <use ./pictures/offpolicy_mc_control.png>
-Package pdftex.def Info: ./pictures/offpolicy_mc_control.png used on input line 543.
+Package pdftex.def Info: ./pictures/offpolicy_mc_control.png used on input line 576.
 (pdftex.def)             Requested size: 328.47638pt x 199.74576pt.
- [9 <./pictures/offpolicy_mc_prediction.png> <./pictures/offpolicy_mc_control.png>] (/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux) ) 
+ [9 <./pictures/offpolicy_mc_prediction.png> <./pictures/offpolicy_mc_control.png>] [10] (/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux) ) 
 Here is how much of TeX's memory you used:
  2701 strings out of 493029
  38258 string characters out of 6136233
@@ -360,11 +365,11 @@ Here is how much of TeX's memory you used:
  11542 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,10n,32p,356b,221s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.pdf (9 pages, 842795 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.pdf (10 pages, 853367 bytes).
 PDF statistics:
- 99 PDF objects out of 1000 (max. 8388607)
- 64 compressed objects within 1 object stream
+ 106 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
