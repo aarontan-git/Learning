@@ -848,5 +848,90 @@ because of the way the incremental implementation works.
 \newpage
 \section{Eligibility Trace}
 
+\noindent
+2 Issues with n-step td\\
+- which n to use?\\
+- delayed learning (delaying the learning by n-transitions)\\
+
+\noindent
+When TD methods are augmented with eligibility traces, they produce a family of
+methods spanning na spectrum that has MC at one end ($\lambda = 1$) and one step
+TD methods at the other ($\lambda = 0$)\\
+
+\noindent
+\textbf{$\lambda$ return}
+
+\noindent
+This solves the problem of "which n to use?" by applying a weight to every
+n-step return. For example, when $\lambda = 0$, $n=1$ is given 100\% of the
+weight. When $\lambda=0.4$, $n=1-6$ are given a set of weights that decay as
+seen in figure 19.When $\lambda = 1$, zero weights is given to any of the
+$n-steps$ while the last term $G_{t}$ taking full effect (creating MC).
+
+\begin{equation}
+G_{t}^{\lambda}=(1-\lambda) \sum_{n=1}^{T-t-1} \lambda^{n-1} G_{t: t+n}+\lambda^{T-t-1} G_{t}
+\end{equation}
+
+\begin{equation}
+\sum \text {weights}=\lambda^{0}+\lambda+\lambda^{2}+\cdots=\frac{1}{1-\lambda}
+\end{equation}
+
+\noindent
+The average is calculated as shown below. In other words, when $\lambda = 0.4$,
+the outcome is similar to when $n$ is equal to 1.67.
+
+\begin{equation}
+1*0.6 + 2*0.24 + 3*0.144 ... 
+\end{equation}
+
+\begin{figure}[h]
+\includegraphics[scale=0.35]{lambda_vs_n}
+\centering
+\caption{$\lambda$ vs. $n-step$}
+\end{figure}
+
+\newpage
+\noindent
+\textbf{TD($\lambda$)}
+
+\noindent
+Eligibility trace has two decay factor, $\gamma$ and $\lambda$. The
+current ET depends on the previous ET.  
+
+\begin{equation}
+Z_{t}(s) \leftarrow \gamma \cdot \lambda \cdot Z_{t-1}(s)+I_{s = S_{t}}
+\end{equation}
+
+\noindent
+If the above is too aggressive, can just set eligibility trace as the following.
+
+\begin{equation}
+\begin{array}{l}
+\operatorname{Z_{t}}(s) = \left\{\begin{array}{ll}
+1 & \text { if } S_{t}=s \\
+\gamma \cdot \lambda \cdot z_{t-1} & \text { if } S_{t} \neq s
+\end{array}\right.
+\end{array}
+\end{equation}
+
+\noindent
+When a TD error is calculated as shown below
+
+\begin{equation}
+\delta_{t}=R_{t+1}+\gamma \cdot V_{t}\left(s_{t+1}\right)-V_{t}\left(s_{t}\right)
+\end{equation}
+
+\noindent
+Can use the latest TD to distribute 
+
+\begin{equation}
+V_{t+1}(s)=V_{t}(s)+\alpha \cdot \delta_{t} \cdot Z_{t}(s), \forall s \in \mathbb{S}
+\end{equation}
+
+\begin{figure}[h]
+\includegraphics[scale=0.4]{elgibility_trace}
+\centering
+\caption{n-step Off-policy SARSA}
+\end{figure}
 
 \end{document}

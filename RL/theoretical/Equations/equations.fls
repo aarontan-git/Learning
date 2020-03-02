@@ -165,6 +165,12 @@ INPUT ./pictures/offpolicy_nstep_td_diagram.png
 INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/./pictures/nstep_offpolicy_sarsa.png
 INPUT ./pictures/nstep_offpolicy_sarsa.png
 INPUT ./pictures/nstep_offpolicy_sarsa.png
+INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/./pictures/lambda_vs_n.png
+INPUT ./pictures/lambda_vs_n.png
+INPUT ./pictures/lambda_vs_n.png
+INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/./pictures/elgibility_trace.png
+INPUT ./pictures/elgibility_trace.png
+INPUT ./pictures/elgibility_trace.png
 INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
