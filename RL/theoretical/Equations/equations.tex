@@ -297,7 +297,7 @@ action\\
 
 \newpage
 \noindent
-\textbf{Value Evaluation}\\
+\textbf{Value Iteration}\\
 - Policy iteration is faster because policy converges quicker
 than value functions\\
 - Bellman Optimality Equation (equation 17) turned in to an update rule \\
@@ -494,6 +494,8 @@ target policy.
 \textbf{Ordinary Importance Sampling}\\
 - $\mathcal{T}(s)$ represent the time steps in which state s is visited (norm =
 total number of samples)\\
+- T(t) = how many steps in the episode where s was visited (since we are dealing
+with chained episodes) \\
 - To estimate $v_{\pi}(s)$, simply scale the returns by the ratios and average
 the results\\
 - $\left\{G_{t}\right\}_{t \in \mathcal{T}(s)}$ are the returns that pertain to
@@ -580,7 +582,10 @@ same ($\pi = b$) and $W = 1$ where $W$ is the importance sampling ratio.
 \textbf{Off-policy MC Control}
 
 \noindent
-What does the last two line of the following pseudo-code mean?
+What does the last two line of the following pseudo-code mean?\\
+- Since b was initiated as a \textit{soft policy} (without coverage of $\pi$),
+that's why the second last line is there (for the chance that an action selected
+under the behavior policy does not exist under the target policy)\\
 
 \begin{figure}[h]
 \includegraphics[scale=0.25]{offpolicy_mc_control}
@@ -859,14 +864,23 @@ methods spanning na spectrum that has MC at one end ($\lambda = 1$) and one step
 TD methods at the other ($\lambda = 0$)\\
 
 \noindent
-\textbf{$\lambda$ return}
+TD($\lambda$) can be implemented in an online and offline fashion.\\
+- Offline: $\lambda$-return (forward view)\\
+- Online: Backward view\\
 
 \noindent
-This solves the problem of "which n to use?" by applying a weight to every
-n-step return. For example, when $\lambda = 0$, $n=1$ is given 100\% of the
-weight. When $\lambda=0.4$, $n=1-6$ are given a set of weights that decay as
+\textbf{$\lambda$ return: Forward View}
+
+\noindent
+This is the basis for the forward view of eligibility trace used in
+TD($\lambda$). This solves the problem of "which n to use?" by applying a weight
+to every n-step return. For example, when $\lambda = 0$, $n=1$ is given 100\% of
+the weight. When $\lambda=0.4$, $n=1-6$ are given a set of weights that decay as
 seen in figure 19.When $\lambda = 1$, zero weights is given to any of the
-$n-steps$ while the last term $G_{t}$ taking full effect (creating MC).
+$n-steps$ while the last term $G_{t}$ taking full effect (creating MC).\\
+
+\noindent
+In the offline case, $\lambda$-return IS TD($\lambda$).
 
 \begin{equation}
 G_{t}^{\lambda}=(1-\lambda) \sum_{n=1}^{T-t-1} \lambda^{n-1} G_{t: t+n}+\lambda^{T-t-1} G_{t}
@@ -892,11 +906,17 @@ the outcome is similar to when $n$ is equal to 1.67.
 
 \newpage
 \noindent
-\textbf{TD($\lambda$)}
+\textbf{TD($\lambda$): Backward View}
 
 \noindent
-Eligibility trace has two decay factor, $\gamma$ and $\lambda$. The
-current ET depends on the previous ET.  
+Forward view is not directly implementable because at each step, you need to use
+info that will happen many steps later. The backward view is an incremental
+mechanism that approximates the forward view where the offline case of the
+backward view achieves the forward view exactly.\\
+
+\noindent
+Eligibility trace has two decay factor, $\gamma$ and $\lambda$ (trace decay
+parameter). The current ET depends on the previous ET.  
 
 \begin{equation}
 Z_{t}(s) \leftarrow \gamma \cdot \lambda \cdot Z_{t-1}(s)+I_{s = S_{t}}
@@ -904,6 +924,8 @@ Z_{t}(s) \leftarrow \gamma \cdot \lambda \cdot Z_{t-1}(s)+I_{s = S_{t}}
 
 \noindent
 If the above is too aggressive, can just set eligibility trace as the following.
+In other words, eligibility trace indicates the degree to which each state is
+eligible for undergoing learning changes.
 
 \begin{equation}
 \begin{array}{l}
@@ -915,23 +937,120 @@ If the above is too aggressive, can just set eligibility trace as the following.
 \end{equation}
 
 \noindent
-When a TD error is calculated as shown below
+One step TD error is calculated as shown below
 
 \begin{equation}
 \delta_{t}=R_{t+1}+\gamma \cdot V_{t}\left(s_{t+1}\right)-V_{t}\left(s_{t}\right)
 \end{equation}
 
 \noindent
-Can use the latest TD to distribute 
+Global TD error signal triggers proportional updates to all recently visited
+states
 
 \begin{equation}
 V_{t+1}(s)=V_{t}(s)+\alpha \cdot \delta_{t} \cdot Z_{t}(s), \forall s \in \mathbb{S}
 \end{equation}
 
+\noindent
+As an example, when $\lambda = 0$, $Z_{t} = 1$ at $S_{t}$ which turns equation
+54 in to the standard TD(0) equation. When $\lambda = 1$, credit given to
+earlier states fall by $\gamma$ which resembles MC behavior.
+
 \begin{figure}[h]
 \includegraphics[scale=0.4]{elgibility_trace}
 \centering
-\caption{n-step Off-policy SARSA}
+\caption{Eligibility Trace}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.5]{eligibility_trace_online}
+\centering
+\caption{Online TD($\lambda$)}
+\end{figure}
+
+\newpage
+\noindent
+The following shows the results of different algorithms. For TD($\lambda$), the
+online and offline implementations are similar when $\lambda$ is small.
+
+\begin{figure}[h]
+\includegraphics[scale=0.45]{results}
+\centering
+\caption{Results}
+\end{figure}
+
+\noindent
+\textbf{SARSA($\lambda$)}
+
+\noindent
+Here, we apply TD($\lambda$) to state action pairs instead of just states;
+therefore, we need a trace for each state-action pair.
+
+\begin{equation}
+Q_{t+1}(s, a)=Q_{t}(s, a)+\alpha \delta_{t} e_{t}(s, a)
+\end{equation}
+
+\begin{equation}
+\delta_{t}=r_{t+1}+\gamma Q_{t}\left(s_{t+1}, a_{t+1}\right)-Q_{t}\left(s_{t}, a_{t}\right)
+\end{equation}
+
+\begin{equation}
+e_{t}(s, a)=\left\{\begin{array}{ll}
+\gamma \lambda e_{t-1}(s, a)+1 & \text { if } s=s_{t} \text { and } a=a_{t} \\
+\gamma \lambda e_{t-1}(s, a) & \text { otherwise }
+\end{array}\right.
+\end{equation}
+
+\begin{figure}[h]
+\includegraphics[scale=0.5]{sarsa_lambda}
+\centering
+\caption{SARSA($\lambda$)}
+\end{figure}
+
+\newpage
+\noindent
+\textbf{Q($\lambda$)}
+
+\noindent
+Q-learning = off-policy = policy learned about need not be the same as the one
+used to select actions. In learning about the value of the greedy policy, we can
+use subsequent experience only as long as the greedy policy is being followed.
+If an exploratory action was chosen, the return for this step does not have any
+relationship to the greedy policy. Instead of looking ahead to the end of an
+episode like in TD($\lambda$) and SARSA($\lambda$), Q($\lambda$) only look ahead
+as far as the next exploratory action.\\
+
+\noindent
+Eligibility trace is 0 when the action taken is exploratory.
+
+\begin{equation}
+e_{t}(s, a)=\mathcal{I}_{s s_{t}} \cdot \mathcal{I}_{a a_{t}}+\left\{\begin{array}{ll}
+\gamma \lambda e_{t-1}(s, a) & \text { if } Q_{t-1}\left(s_{t}, a_{t}\right)=\max _{a} Q_{t-1}\left(s_{t}, a\right) \\
+0 & \text { otherwise }
+\end{array}\right.
+\end{equation}
+
+\noindent
+The update algorithm and the TD error is calculated as shown below.
+
+\begin{equation}
+Q_{t+1}(s, a)=Q_{t}(s, a)+\alpha \delta_{t} e_{t}(s, a)
+\end{equation}
+
+\begin{equation}
+\delta_{t}=r_{t+1}+\gamma \max _{a^{\prime}} Q_{t}\left(s_{t+1}, a^{\prime}\right)-Q_{t}\left(s_{t}, a_{t}\right)
+\end{equation}
+
+\begin{figure}[h]
+\includegraphics[scale=0.5]{q_lambda}
+\centering
+\caption{Q($\lambda$)}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.5]{q_lambda_diagram}
+\centering
+\caption{Q($\lambda$) Backup Diagram}
 \end{figure}
 
 \end{document}
