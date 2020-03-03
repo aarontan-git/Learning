@@ -103,7 +103,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
 OUTPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.pdf
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/./pictures/value_functions.png
@@ -127,6 +127,7 @@ INPUT ./pictures/exploringstart_mc.png
 INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/./pictures/onpolicy_firstvisit_mc.png
 INPUT ./pictures/onpolicy_firstvisit_mc.png
 INPUT ./pictures/onpolicy_firstvisit_mc.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/./pictures/offpolicy_mc_prediction.png
 INPUT ./pictures/offpolicy_mc_prediction.png
 INPUT ./pictures/offpolicy_mc_prediction.png
@@ -189,6 +190,7 @@ INPUT ./pictures/q_lambda_diagram.png
 INPUT /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb

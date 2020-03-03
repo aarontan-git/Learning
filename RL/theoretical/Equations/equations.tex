@@ -25,7 +25,7 @@ Rewards}
 \end{equation}
 
 \noindent
-A state is \textit{Markov} if and only if 
+\textbf{A state is \textit{Markov} if and only if}
 
 \begin{equation}
 \mathbb{P}\left[S_{t+1} | S_{t}\right]=\mathbb{P}\left[S_{t+1} | S_{1}, \ldots, S_{t}\right]
@@ -111,7 +111,7 @@ the way. Assumes discrete and is invariant of time (time doesn't matter).
 
 \begin{equation}
 \begin{aligned}
-v_{\pi}(s) &= E_{\pi}[R_{t+1}+\gamma \cdot G_{t+1} | S_{t}=s] \\
+v_{\pi}(s) &= \mathbb{E}_{\pi}[R_{t+1}+\gamma \cdot G_{t+1} | S_{t}=s] \\
 &= \sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p(s^{\prime}, r|s, a)[r+\gamma \mathbb{E}_{\pi}[G_{t+1} | S_{t+1}=s^{\prime}]]\\
 &=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right] \quad \forall s \in S
 \end{aligned}
@@ -124,7 +124,8 @@ q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s, A_{t}=a\right]=\math
 \end{equation}
 
 \noindent
-\textbf{Bellman Equation for $q_{\pi}(s, a)$}
+\textbf{Bellman Equation for $q_{\pi}(s, a)$}: policy is included to choose
+action $a^{\prime}$ from $s^{\prime}$
 
 \begin{equation}
 q_{\pi}(s, a)=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \sum_{a^{\prime}} \pi\left(a^{\prime} | s^{\prime}\right) q_{\pi}\left(s^{\prime}, a^{\prime}\right)\right]
@@ -286,8 +287,15 @@ action\\
 
 \noindent
 \textbf{Policy Iteration}\\
-- built on the fundamentals of value iteration\\
-- more efficient (CPU time) than value iteration
+- built on the fundamentals of value iteration, more efficient (CPU time) than
+value iteration.\\
+\noindent
+To solve calculation problems: \\
+- Initiate policy\\
+- Write equations for value functions using equation 19\\
+- Solve for Values at each state with above equations\\
+- Use the calculated Values and a new action to update the value at each state\\
+- If the value is higher, update the policy
 
 \begin{figure}[h]
 \includegraphics[scale=0.4]{policy_iteration}
@@ -307,11 +315,11 @@ but we stop before then \\
 - All algorithms converge to an optimal policy for discounted finite MDPs\\
 - When $\gamma$ is close to 1, iteration goes forever = making value iteration
 inefficient\\
-- Policy iteration converges faster even for smaller $\gamma$
+- Policy iteration converges faster even for smaller $\gamma$\\
 - Main difference between Value Iteration and Policy Iteration\\
--- In value iteration, instead of summing values from all actions per state,
+---- In value iteration, instead of summing values from all actions per state,
 take only the best action value per state as the value of that state\\
-- Value iteration update is identical to policy evaluation except that the max
+---- Value iteration update is identical to policy evaluation except that the max
 is taken over all actions\\
 
 \begin{equation}
@@ -345,10 +353,18 @@ argmax)\\
 ---- overwrite policy table with best action
 
 \begin{figure}[h]
-\includegraphics[scale=0.35]{value_iteration}
+\includegraphics[scale=0.4]{value_iteration}
 \centering
 \caption{Value Iteration}
 \end{figure}
+
+\noindent
+To solve calculation problems:\\
+- Initiate value at each state\\
+- Use equation 21 to obtain the max value at each state (use all actions and the
+subsequent states)\\
+- Repeat above step\\
+- Use argmax to update the policy with the best action\\
 
 \noindent
 \textbf{Summary of Policy and Value Iteration}\\
@@ -380,7 +396,7 @@ later states in the same episode\\
 The following shows first-visit MC methods.
 
 \begin{figure}[h]
-\includegraphics[scale=0.25]{firstvisit_mc}
+\includegraphics[scale=0.28]{firstvisit_mc}
 \centering
 \caption{First-visit MC Prediction}
 \end{figure}
@@ -393,10 +409,10 @@ a deterministic policy. To fix this: \\
 - Includes a greedy policy at the end to pick the best action in the next
 iteration (line 14)\\
 - Cons: this solution is unlikely to learn from real experiences but simulated
-episodes are fine\\
+episodes are fine
 
 \begin{figure}[h]
-\includegraphics[scale=0.25]{exploringstart_mc}
+\includegraphics[scale=0.28]{exploringstart_mc}
 \centering
 \caption{Exploring Start MC Control}
 \end{figure}
@@ -494,8 +510,8 @@ target policy.
 \textbf{Ordinary Importance Sampling}\\
 - $\mathcal{T}(s)$ represent the time steps in which state s is visited (norm =
 total number of samples)\\
-- T(t) = how many steps in the episode where s was visited (since we are dealing
-with chained episodes) \\
+- T(t) = total \# of steps in the episode where s was visited (since we are dealing
+with chained episodes: 0-100, 101-200...etc) \\
 - To estimate $v_{\pi}(s)$, simply scale the returns by the ratios and average
 the results\\
 - $\left\{G_{t}\right\}_{t \in \mathcal{T}(s)}$ are the returns that pertain to
@@ -527,6 +543,8 @@ ratio in the numerator and denominator cancel out. For ordinary, the denominator
 would equal to 1, and the result is equivalent to $\rho_{t: T(t)-1} G_{t}$. If
 the ratio was 10, which indicates that the trajectory observed is 10 times as
 likely under the target policy as under the behavior policy.\\
+- Ordinary: unbiased, high variance, weak\\
+- Weighted: biased, low variance, strong\\
 
 \noindent
 \textbf{Incremental Implementation: Ordinary Importance Sampling}
@@ -786,7 +804,6 @@ Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alph
 \caption{n-step SARSA}
 \end{figure}
     
-\newpage
 \noindent
 \textbf{$n$-step Off-policy Learning}
 
@@ -807,6 +824,7 @@ V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha \rho_{t: t+n
 \caption{n-step Off-policy n-step TD}
 \end{figure}
 
+\newpage
 \noindent
 \textbf{Importance Sampling Ratio}
 \begin{equation}
@@ -845,7 +863,7 @@ applied). Additionally, $\rho$ is applied to $G - Q$ instead of just $G$ is
 because of the way the incremental implementation works.
 
 \begin{figure}[h]
-\includegraphics[scale=0.35]{nstep_offpolicy_sarsa}
+\includegraphics[scale=0.45]{nstep_offpolicy_sarsa}
 \centering
 \caption{n-step Off-policy SARSA}
 \end{figure}
