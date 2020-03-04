@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.21)  3 MAR 2020 12:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.21)  3 MAR 2020 21:28
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -352,156 +352,156 @@ File: ./pictures/offpolicy_mc_prediction.png Graphic file (type png)
 Package pdftex.def Info: ./pictures/offpolicy_mc_prediction.png used on input line 594.
 (pdftex.def)             Requested size: 328.72733pt x 180.92549pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 602--607
+Underfull \hbox (badness 10000) in paragraph at lines 602--609
 
  []
 
 <./pictures/offpolicy_mc_control.png, id=52, 1313.90875pt x 798.985pt>
 File: ./pictures/offpolicy_mc_control.png Graphic file (type png)
  <use ./pictures/offpolicy_mc_control.png>
-Package pdftex.def Info: ./pictures/offpolicy_mc_control.png used on input line 609.
+Package pdftex.def Info: ./pictures/offpolicy_mc_control.png used on input line 611.
 (pdftex.def)             Requested size: 328.47638pt x 199.74576pt.
  [9 <./pictures/offpolicy_mc_prediction.png> <./pictures/offpolicy_mc_control.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 618--620
+Underfull \hbox (badness 10000) in paragraph at lines 620--627
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 621--628
+Underfull \hbox (badness 10000) in paragraph at lines 628--633
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 629--636
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 637--639
+Underfull \hbox (badness 10000) in paragraph at lines 634--636
 
  []
 
 <./pictures/onestep_td.png, id=56, 878.28125pt x 387.4475pt>
 File: ./pictures/onestep_td.png Graphic file (type png)
  <use ./pictures/onestep_td.png>
-Package pdftex.def Info: ./pictures/onestep_td.png used on input line 665.
+Package pdftex.def Info: ./pictures/onestep_td.png used on input line 662.
 (pdftex.def)             Requested size: 351.30627pt x 154.97624pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 670--675
+Underfull \hbox (badness 10000) in paragraph at lines 667--673
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 674--679
 
  []
 
 <./pictures/sarsa_diagram.png, id=57, 636.3775pt x 56.21pt>
 File: ./pictures/sarsa_diagram.png Graphic file (type png)
  <use ./pictures/sarsa_diagram.png>
-Package pdftex.def Info: ./pictures/sarsa_diagram.png used on input line 677.
+Package pdftex.def Info: ./pictures/sarsa_diagram.png used on input line 681.
 (pdftex.def)             Requested size: 318.18797pt x 28.10492pt.
  [10 <./pictures/onestep_td.png> <./pictures/sarsa_diagram.png>] <./pictures/onpolicy_sarsa.png, id=61, 879.285pt x 386.44376pt>
 File: ./pictures/onpolicy_sarsa.png Graphic file (type png)
  <use ./pictures/onpolicy_sarsa.png>
-Package pdftex.def Info: ./pictures/onpolicy_sarsa.png used on input line 699.
+Package pdftex.def Info: ./pictures/onpolicy_sarsa.png used on input line 703.
 (pdftex.def)             Requested size: 351.70778pt x 154.57475pt.
  <./pictures/offpolicy_qlearning.png, id=62, 875.27pt x 358.33875pt>
 File: ./pictures/offpolicy_qlearning.png Graphic file (type png)
  <use ./pictures/offpolicy_qlearning.png>
-Package pdftex.def Info: ./pictures/offpolicy_qlearning.png used on input line 721.
+Package pdftex.def Info: ./pictures/offpolicy_qlearning.png used on input line 725.
 (pdftex.def)             Requested size: 350.10179pt x 143.33296pt.
  [11 <./pictures/onpolicy_sarsa.png> <./pictures/offpolicy_qlearning.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 729--735
+Underfull \hbox (badness 10000) in paragraph at lines 740--746
 
  []
 
 <./pictures/nstep.png, id=66, 568.1225pt x 494.84875pt>
 File: ./pictures/nstep.png Graphic file (type png)
  <use ./pictures/nstep.png>
-Package pdftex.def Info: ./pictures/nstep.png used on input line 737.
+Package pdftex.def Info: ./pictures/nstep.png used on input line 748.
 (pdftex.def)             Requested size: 170.43805pt x 148.45576pt.
  <./pictures/nstep_td.png, id=67, 875.27pt x 582.175pt>
 File: ./pictures/nstep_td.png Graphic file (type png)
  <use ./pictures/nstep_td.png>
-Package pdftex.def Info: ./pictures/nstep_td.png used on input line 771.
+Package pdftex.def Info: ./pictures/nstep_td.png used on input line 782.
 (pdftex.def)             Requested size: 350.10179pt x 232.86588pt.
  [12 <./pictures/nstep.png> <./pictures/nstep_td.png>] <./pictures/nstep_sarsa.png, id=72, 879.285pt x 720.6925pt>
 File: ./pictures/nstep_sarsa.png Graphic file (type png)
  <use ./pictures/nstep_sarsa.png>
-Package pdftex.def Info: ./pictures/nstep_sarsa.png used on input line 802.
+Package pdftex.def Info: ./pictures/nstep_sarsa.png used on input line 813.
 (pdftex.def)             Requested size: 351.70778pt x 288.2719pt.
  <./pictures/offpolicy_nstep_td_diagram.png, id=73, 637.38126pt x 93.34875pt>
 File: ./pictures/offpolicy_nstep_td_diagram.png Graphic file (type png)
  <use ./pictures/offpolicy_nstep_td_diagram.png>
-Package pdftex.def Info: ./pictures/offpolicy_nstep_td_diagram.png used on input line 822.
+Package pdftex.def Info: ./pictures/offpolicy_nstep_td_diagram.png used on input line 833.
 (pdftex.def)             Requested size: 254.94798pt x 37.33882pt.
  [13 <./pictures/nstep_sarsa.png> <./pictures/offpolicy_nstep_td_diagram.png>] <./pictures/nstep_offpolicy_sarsa.png, id=78, 875.27pt x 718.685pt>
 File: ./pictures/nstep_offpolicy_sarsa.png Graphic file (type png)
  <use ./pictures/nstep_offpolicy_sarsa.png>
-Package pdftex.def Info: ./pictures/nstep_offpolicy_sarsa.png used on input line 866.
+Package pdftex.def Info: ./pictures/nstep_offpolicy_sarsa.png used on input line 877.
 (pdftex.def)             Requested size: 393.86786pt x 323.40526pt.
  [14 <./pictures/nstep_offpolicy_sarsa.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 874--878
+Underfull \hbox (badness 10000) in paragraph at lines 885--889
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 879--883
+Underfull \hbox (badness 10000) in paragraph at lines 890--894
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 884--888
+Underfull \hbox (badness 10000) in paragraph at lines 895--899
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 892--899
+Underfull \hbox (badness 10000) in paragraph at lines 903--910
 
  []
 
 <./pictures/lambda_vs_n.png, id=82, 989.6975pt x 357.335pt>
 File: ./pictures/lambda_vs_n.png Graphic file (type png)
  <use ./pictures/lambda_vs_n.png>
-Package pdftex.def Info: ./pictures/lambda_vs_n.png used on input line 920.
+Package pdftex.def Info: ./pictures/lambda_vs_n.png used on input line 931.
 (pdftex.def)             Requested size: 346.3993pt x 125.06912pt.
  [15 <./pictures/lambda_vs_n.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 929--934
+Underfull \hbox (badness 10000) in paragraph at lines 940--945
 
  []
 
 <./pictures/elgibility_trace.png, id=86, 949.5475pt x 452.69125pt>
 File: ./pictures/elgibility_trace.png Graphic file (type png)
  <use ./pictures/elgibility_trace.png>
-Package pdftex.def Info: ./pictures/elgibility_trace.png used on input line 978.
+Package pdftex.def Info: ./pictures/elgibility_trace.png used on input line 989.
 (pdftex.def)             Requested size: 379.81227pt x 181.07329pt.
- <./pictures/eligibility_trace_online.png, id=87, 737.75626pt x 303.1325pt>
+ [16 <./pictures/elgibility_trace.png>] <./pictures/eligibility_trace_online.png, id=90, 737.75626pt x 303.1325pt>
 File: ./pictures/eligibility_trace_online.png Graphic file (type png)
  <use ./pictures/eligibility_trace_online.png>
-Package pdftex.def Info: ./pictures/eligibility_trace_online.png used on input line 984.
+Package pdftex.def Info: ./pictures/eligibility_trace_online.png used on input line 1005.
 (pdftex.def)             Requested size: 368.87723pt x 151.56587pt.
- [16 <./pictures/elgibility_trace.png> <./pictures/eligibility_trace_online.png>] <./pictures/results.png, id=91, 625.33624pt x 625.33624pt>
+ <./pictures/results.png, id=91, 625.33624pt x 625.33624pt>
 File: ./pictures/results.png Graphic file (type png)
  <use ./pictures/results.png>
-Package pdftex.def Info: ./pictures/results.png used on input line 995.
+Package pdftex.def Info: ./pictures/results.png used on input line 1015.
 (pdftex.def)             Requested size: 281.39871pt x 281.39871pt.
- <./pictures/sarsa_lambda.png, id=92, 888.31876pt x 306.14375pt>
+ [17 <./pictures/eligibility_trace_online.png> <./pictures/results.png>] <./pictures/sarsa_lambda.png, id=95, 888.31876pt x 306.14375pt>
 File: ./pictures/sarsa_lambda.png Graphic file (type png)
  <use ./pictures/sarsa_lambda.png>
-Package pdftex.def Info: ./pictures/sarsa_lambda.png used on input line 1023.
+Package pdftex.def Info: ./pictures/sarsa_lambda.png used on input line 1042.
 (pdftex.def)             Requested size: 444.1583pt x 153.07149pt.
- [17 <./pictures/results.png> <./pictures/sarsa_lambda.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1032--1040
+
+Underfull \hbox (badness 10000) in paragraph at lines 1050--1058
 
  []
 
 <./pictures/q_lambda.png, id=96, 594.22pt x 365.365pt>
 File: ./pictures/q_lambda.png Graphic file (type png)
  <use ./pictures/q_lambda.png>
-Package pdftex.def Info: ./pictures/q_lambda.png used on input line 1063.
+Package pdftex.def Info: ./pictures/q_lambda.png used on input line 1080.
 (pdftex.def)             Requested size: 297.10927pt x 182.68205pt.
- <./pictures/q_lambda_diagram.png, id=97, 834.11626pt x 378.41376pt>
+ [18 <./pictures/sarsa_lambda.png> <./pictures/q_lambda.png>] <./pictures/q_lambda_diagram.png, id=100, 834.11626pt x 378.41376pt>
 File: ./pictures/q_lambda_diagram.png Graphic file (type png)
  <use ./pictures/q_lambda_diagram.png>
-Package pdftex.def Info: ./pictures/q_lambda_diagram.png used on input line 1069.
+Package pdftex.def Info: ./pictures/q_lambda_diagram.png used on input line 1087.
 (pdftex.def)             Requested size: 417.05711pt x 189.2064pt.
- [18 <./pictures/q_lambda.png> <./pictures/q_lambda_diagram.png>] (/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux) ) 
+ [19 <./pictures/q_lambda_diagram.png>] (/home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.aux) ) 
 Here is how much of TeX's memory you used:
  2788 strings out of 493029
  40794 string characters out of 6136233
@@ -511,10 +511,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  37i,14n,32p,356b,225s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.pdf (18 pages, 2181045 bytes).
+Output written on /home/aaron/Documents/Hub/Learning/RL/theoretical/Equations/equations.pdf (19 pages, 2182506 bytes).
 PDF statistics:
- 155 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
+ 159 PDF objects out of 1000 (max. 8388607)
+ 95 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  126 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -600,10 +600,12 @@ same ($\pi = b$) and $W = 1$ where $W$ is the importance sampling ratio.
 \textbf{Off-policy MC Control}
 
 \noindent
-What does the last two line of the following pseudo-code mean?\\
 - Since b was initiated as a \textit{soft policy} (without coverage of $\pi$),
 that's why the second last line is there (for the chance that an action selected
 under the behavior policy does not exist under the target policy)\\
+- The last equation has a 1 in the numerator because the target policy is
+updated with the argmax action 2 lines prior already, so the target policy is no
+longer outputting a probability.\\
 
 \begin{figure}[h]
 \includegraphics[scale=0.25]{offpolicy_mc_control}
@@ -616,23 +618,18 @@ under the behavior policy does not exist under the target policy)\\
 \section{Temporal-Difference Learning}
 
 \noindent
-\textbf{TD vs MC}\\
-
-\noindent
 TD:\\
-- Biased samples because of bootstrapping\\
-- Learn after transition: implemented in online - fully incremental fashion\\
-- Learn from incomplete episode (used in continuing task)\\
-- Sensitive to initial values (initialization of V or Q)\\
+- Biased samples because of bootstrapping - Sensitive to initial values
+(initialization of V or Q)\\
+- Learn after transition: implemented in online - fully incremental fashion -
+used in continuing task\\
 - More efficient: in practice, converge faster than MC\\
 
 \noindent
 MC:\\
-- Solely dependent on environment\\
+- Solely dependent on environment - insensitive to initial values\\
 - No bias, high variance\\
-- Learn at the end of episode: delayed learning\\
-- Only used with episodic tasks\\
-- Insensitive to initial values\\
+- Learn at the end of episode: delayed learning (only used with episodic tasks)\\
 
 \noindent
 When sample size is finite, may converge to different values.\\
@@ -666,6 +663,13 @@ where the TD error is
 \centering
 \caption{One step TD}
 \end{figure}
+
+\noindent
+Solving calculation problems:\\
+- Initiate all Values to zero\\
+- Start simulation: observing first state and reward\\
+- Emission: go to the next state and observe reward\\
+- Calculate update using equation 35 and repeat\\
 
 \noindent
 \textbf{SARSA: On-policy TD Control}\\
@@ -722,6 +726,13 @@ Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{
 \centering
 \caption{Q-learning: Off-policy TD Control}
 \end{figure}
+
+\noindent
+Calculation problem:\\
+- Initiate Q(s,a) values for all actions within each state\\
+- Start simulation: pick action based on $\epsilon-greedy$\\
+- Emission: uses equation 38 to update Q value\\
+- Update policy by doing argmax (including the Q that was just calculated)
 
 \newpage
 \noindent
@@ -878,7 +889,7 @@ because of the way the incremental implementation works.
 
 \noindent
 When TD methods are augmented with eligibility traces, they produce a family of
-methods spanning na spectrum that has MC at one end ($\lambda = 1$) and one step
+methods spanning a spectrum that has MC at one end ($\lambda = 1$) and one step
 TD methods at the other ($\lambda = 0$)\\
 
 \noindent
@@ -980,13 +991,22 @@ earlier states fall by $\gamma$ which resembles MC behavior.
 \caption{Eligibility Trace}
 \end{figure}
 
+\newpage
+\noindent
+The following shows the Online TD($\lambda$) formula. To change it to SARSA, all
+V are first replaced with Q. Line 5 is not used. After line 6, choose
+$a^{\prime}$ from $s^{\prime}$ using $\epsilon-greedy$. For Q($\lambda$), need
+to check if the chosen action $a^{\prime}$ is optimal. To do so, after line 6
+(including the previously added line), choose $a^{*}$ using
+$argmax_{b}(s^{\prime},b)$. Then, line 11 is changed to only update the trace if
+$a^{\prime} = a^{*}$ otherwise it is set to zero.
+
 \begin{figure}[h]
 \includegraphics[scale=0.5]{eligibility_trace_online}
 \centering
 \caption{Online TD($\lambda$)}
 \end{figure}
 
-\newpage
 \noindent
 The following shows the results of different algorithms. For TD($\lambda$), the
 online and offline implementations are similar when $\lambda$ is small.
@@ -997,6 +1017,7 @@ online and offline implementations are similar when $\lambda$ is small.
 \caption{Results}
 \end{figure}
 
+\newpage
 \noindent
 \textbf{SARSA($\lambda$)}
 
@@ -1007,11 +1028,9 @@ therefore, we need a trace for each state-action pair.
 \begin{equation}
 Q_{t+1}(s, a)=Q_{t}(s, a)+\alpha \delta_{t} e_{t}(s, a)
 \end{equation}
-
 \begin{equation}
 \delta_{t}=r_{t+1}+\gamma Q_{t}\left(s_{t+1}, a_{t+1}\right)-Q_{t}\left(s_{t}, a_{t}\right)
 \end{equation}
-
 \begin{equation}
 e_{t}(s, a)=\left\{\begin{array}{ll}
 \gamma \lambda e_{t-1}(s, a)+1 & \text { if } s=s_{t} \text { and } a=a_{t} \\
@@ -1025,7 +1044,6 @@ e_{t}(s, a)=\left\{\begin{array}{ll}
 \caption{SARSA($\lambda$)}
 \end{figure}
 
-\newpage
 \noindent
 \textbf{Q($\lambda$)}
 
@@ -1054,7 +1072,6 @@ The update algorithm and the TD error is calculated as shown below.
 \begin{equation}
 Q_{t+1}(s, a)=Q_{t}(s, a)+\alpha \delta_{t} e_{t}(s, a)
 \end{equation}
-
 \begin{equation}
 \delta_{t}=r_{t+1}+\gamma \max _{a^{\prime}} Q_{t}\left(s_{t+1}, a^{\prime}\right)-Q_{t}\left(s_{t}, a_{t}\right)
 \end{equation}
@@ -1065,6 +1082,7 @@ Q_{t+1}(s, a)=Q_{t}(s, a)+\alpha \delta_{t} e_{t}(s, a)
 \caption{Q($\lambda$)}
 \end{figure}
 
+\newpage
 \begin{figure}[h]
 \includegraphics[scale=0.5]{q_lambda_diagram}
 \centering
